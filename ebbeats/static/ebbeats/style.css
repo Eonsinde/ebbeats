@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;  
+}
+
+body{
+    font-family: 'Permanent Marker', cursive;
+    letter-spacing: 1px;
+    overflow: hidden;
+    background: #373e44;
+}
+
+.text-app{
+    color: #ecebeb;
+}
+
+.text-app:hover{
+    color: #ecebeb;
+}
+
+.main-content-bg{
+    background: #373e44;
+}
+
+
+.navbar-toggler{
+    display: none;
+    transition: .5s ease;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+.message-box{
+    visibility: collapse;
+    padding: 10px;
+    position: absolute;
+    top: 25px;
+    left: 0;
+    right: 0;
+    color: #ecebeb;
+    width: 20%;
+    border-radius: 3px;
+    box-shadow: 0 0 10px #000000;
+    text-align: center;
+    margin: auto;
+    z-index: 3;
+}
+
+
+/* this is where the styling of our application commences */
+/* for the header section of our application */
+header{
+}
+
+header  a{
+    color: #ecebeb;
+    transition: .5s ease;
+}
+
+.drop-down{
+    position: relative;
+    display: inline-block;
+}
+
+.drop-down-content{
+    display: none;
+    top: 40px;
+    position: absolute;
+    /* background: #ecebeb; */
+    /* background: rgb(53, 54, 59); */
+    width: 180px;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px #000000bc;
+    z-index: 3;
+}
+
+.drop-down:focus-within .drop-down-content{
+    display: block;
+}
+
+.drop-down:focus-within a.important-btn{
+    background: #ffffff;
+    color: rgb(204, 57, 57);
+    box-shadow: 0 0 5px #000000bc;
+}
+
+a.important-btn{ /* dashboard settings */
+    border-radius: 100%;
+    padding: 5px 9px;
+    font-size: 1rem;
+}
+
+a.important-btn:hover{
+    background: #ffffff;
+    color: rgb(204, 57, 57);
+}
+
+a.cart-link{ /* cart link button */
+    border-radius: 100%;
+    padding: 5px 10px;
+}
+
+a.cart-link:hover{
+    background: #ffffff;
+    color: rgb(204, 57, 57);
+}
+
+header a:hover{
+    color: #fff;
+}
+
+
+/* for the nav section of our application */
+nav#side-nav{
+    width: 260px;
+    position: fixed;
+    height: 100%;
+    z-index:2;
+    padding: 10px 0px 0px 0px;
+    overflow: hidden;
+    transition: .4s ease;
+}
+
+.btn-close{
+    display: none;
+    color: whitesmoke;
+    position: absolute;
+    right: 18px;
+    top: 10px;
+    font-size: 1.8rem;
+    transform: .5s ease;
+}
+
+.btn-close:hover{
+    color: rgb(168, 69, 69);
+}
+
+.my-navbar{
+    margin: 100px 0px 0px 0px;
+}
+
+.navlink{
+    margin: 30px auto;
+    color: #ecebeb;
+    width: 80%;
+    font-size: 1.2rem;
+    transition: .5s ease;
+    display: block;
+}
+
+.navlink.active{
+    color: rgb(204, 57, 57);
+    /* color: #007bff; */
+}
+
+.navlink:hover:not(.active){
+    color: rgb(255, 255, 255);
+}
+
+footer{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 78px;
+    color: #ecebeb;
+}
+
+.social-icon{
+    font-size: 1.9rem;
+    color: #ecebeb;
+    transition: .5s ease;
+}
+
+.social-icon:hover{
+    color: #fff;
+}
+
+.copyright-section{
+    font-size: .8rem;
+}
+
+
+
+/* for the main-content section of our app */
+.main-content{
+    margin-left: 260px;
+    padding: 10px;
+    transition: .4s ease;
+    box-sizing: border-box;
+    height: 100vh;
+    overflow-y: auto;
+    background: #373e44;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.owl-stage{
+    margin: 0 0 20px 0;
+}
+
+.owl-item{
+    position: relative;
+    box-shadow: 0 0 10px #000000bc;
+}
+
+.product-placement{
+    overflow: hidden;
+}
+
+.product-detail-dropdown{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    transition: .5s ease;
+}
+
+.product-detail-dropdown.slide-right{
+    transform: translate(-100%, 0);
+}
+
+.product-placement:hover .product-detail-dropdown.slide-right{
+    transform: translate(0,0);
+}
+
+
+@media screen and (max-width: 768px){
+    .message-box{
+        width: 40%;
+    }
+    .navbar-toggler{
+        display: block;
+    }
+    .btn-close{
+        display: block;
+    }
+
+    nav#side-nav{
+        transform: translate3d(-260px, 0px, 0px);
+        z-index: 2;
+    }
+
+    .main-content{
+        margin-left: 0px;
+        width: 100%;
+    }
+}

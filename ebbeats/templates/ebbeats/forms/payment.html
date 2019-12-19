@@ -1,0 +1,27 @@
+{% extends 'ebbeats/index.html' %}
+
+{% block title %}Ebbeats - Payment{% endblock %}
+
+{% block extrastyles %}
+    <style>
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <section class="payment-section mb-5">
+       {% load crispy_forms_tags %}
+        <form action="{% url 'process_payment' payment.token %}" method="POST">
+            {% csrf_token %}
+            {{ payment_form|crispy }}
+            <a href="#" class="btn btn-outline-danger">Submit</a>
+        </form>
+    </section>
+{% endblock %}
+
+
+{% block extrascripts %}
+    <script>
+
+    </script>
+{% endblock %}

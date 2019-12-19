@@ -1,0 +1,63 @@
+{% extends 'ebbeats/index.html' %}
+
+{% block title %}Ebbeats - Contribute{% endblock %}
+
+{% block extrastyles %}
+    <style>
+    
+    </style>
+{% endblock %}
+
+{% block navlinks %}
+    <a href="{% url 'ebbeats:home' %}" class='navlink text-left text-uppercase'><i class='fas fa-home mr-3'></i>Home</a>
+    <a href="{% url 'ebbeats:explore' %}" class='navlink text-left text-uppercase'><i class='fas fa-globe mr-3'></i>Explore</a>
+    <a href="{% url 'ebbeats:contact' %}" class='navlink text-left text-uppercase'><i class='fas fa-phone-alt mr-3'></i>Contact</a>
+    <a href="{% url 'ebbeats:contribute' %}" class='navlink text-left text-uppercase active'><i class='fas fa-gem mr-3'></i>Contribute</a>
+    <a href="#" class='navlink text-left text-uppercase'><i class='fas fa-question-circle mr-3'></i>FAQs</a>
+{% endblock %}
+
+
+{% block content %}
+    <!-- <form id="paystack-card-form">
+        <input type="text" data-paystack="number">
+        <input type="text" data-paystack="cvv">            
+        <input type="text" data-paystack="expiryMonth">
+        <input type="text"  data-paystack="expiryYear">
+        <button type="submit" data-paystack="submit">Submit</button>
+      </form> -->
+    <form >
+        <script src="https://js.paystack.co/v1/inline.js"></script>
+        <button type="button" onclick="payWithPaystack()"> Pay </button> 
+    </form>
+{% endblock %}
+
+
+{% block extrascripts %}
+    <script>
+        function payWithPaystack(){
+            var handler = PaystackPop.setup({
+            key: 'pk_test_7ac97f42b0cb3f6c4f2c24c423491cf5903d8054',
+            email: 'olasinde.eon@gmail.com',
+            amount: 10000,
+            currency: "NGN",
+            ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+            metadata: {
+                custom_fields: [
+                    {
+                        display_name: "Mobile Number",
+                        variable_name: "mobile_number",
+                        value: "+2347010237194"
+                    }
+                ]
+            },
+            callback: function(response){
+                alert('success. transaction ref is ' + response.reference);
+            },
+            onClose: function(){
+                alert('window closed');
+            }
+            });
+            handler.openIframe();
+        }
+    </script>
+{% endblock %}

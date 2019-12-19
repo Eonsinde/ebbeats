@@ -1,0 +1,368 @@
+{% extends 'ebbeats/index.html' %}
+
+{% block title %}Ebbeats - Explore{% endblock %}
+
+{% block extrastyles %}
+    <style>
+        .query-form{
+            border: 1px #cac8c8 solid;
+            transition: .3s ease;
+        }
+
+        .query-form:focus-within{
+            transform: scale(1.1);
+        }
+
+        .query-form input{
+            padding: 3px 5px;
+            border: none;
+            outline: none;
+            color: #b9b8b8;
+        }
+
+        .query-form button{
+            background: none; 
+            border:none; 
+            outline: none;
+            color: #ecebeb;
+        }
+
+        .filter-dropdown{
+            position: relative;
+        }
+
+        .filter-dropdown-content{
+            border: 1px white solid;
+            display: none;
+            background:#343a40;
+            position: absolute;
+            z-index: 3;
+            top: 44px;
+            width: 270px;
+            box-shadow: 0 0 10px #000000bc;
+        }
+
+        .filter-dropdown label{
+            color: #ecebeb;
+            display: block;
+            box-sizing: border-box;
+        }
+
+        .filter-fieldset{
+            overflow: hidden;
+            padding: 10px 10px 10px 10px;
+            border-bottom: 1px #ccc solid;
+        }
+
+        .filter-fieldset input{
+            background: transparent;
+            border: none;
+            width: 100%;
+            color: #9c9c9c;
+            outline: none;
+        }
+
+        .filter-fieldset select{
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+            background: none;
+            color: #ecebeb;
+            border: none;
+            outline: none;
+        }
+
+        .filter-fieldset select option{
+            box-sizing: border-box;
+            background: #343a40;
+        }
+
+        .filter-link{
+            border: 1px #ecebeb solid;
+            padding: 7px;
+        }
+
+        .filter-btn{
+            background: #dc3545;
+            color: #ecebeb;
+            padding: 8px;
+            border: none;
+            transition: .3s ease;
+        }
+
+        .filter-btn:hover{
+            background: #c73442;
+        }
+
+        .filter-dropdown:focus-within .filter-dropdown-content{
+            display: block;
+        }
+
+        .preview-dropdown{
+            position: relative;
+        }
+
+        .preview-dropdown-content{
+            display: none;
+            position: absolute;
+            background: #343a40;
+            width: 250px;
+            z-index: 3;
+            padding: 20px 10px;
+            bottom: 30px;
+            left: -170px;
+            right: 0;
+            box-shadow: 0 0 10px #000000bc;
+        }
+
+        .preview-dropdown-content p{
+            color: #ecebeb;
+            border: 1px #ccc solid;
+            padding: 10px;
+            opacity: .8;
+        }
+
+        .preview-dropdown-content p a{
+            color: #ecebeb;
+        }
+
+        .preview-dropdown-content p a:hover{
+            color: white;
+        }
+
+        .preview-dropdown-content p:hover{
+            opacity: 1;
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+
+        .preview-dropdown-content .preview-play-btn{
+            color: white;
+            opacity: .5;
+        }
+
+        .preview-play-btn:hover{
+            opacity: 1;
+        }
+
+        .preview-dropdown:focus-within .preview-dropdown-content{
+            display: block;
+        }
+
+    </style>
+{% endblock %}
+
+
+{% block navlinks %}
+ <a href="{% url 'ebbeats:home' %}" class='navlink text-left text-uppercase'><i class='fas fa-home mr-3'></i>Home</a>
+<a href="{% url 'ebbeats:explore' %}" class='navlink text-left text-uppercase active'><i class='fas fa-globe mr-3'></i>Explore</a>
+<a href="{% url 'ebbeats:contact' %}" class='navlink text-left text-uppercase'><i class='fas fa-phone-alt mr-3'></i>Contact</a>
+<a href="{% url 'ebbeats:contribute' %}" class='navlink text-left text-uppercase'><i class='fas fa-gem mr-3'></i>Contribute</a>
+<a href="#" class='navlink text-left text-uppercase'><i class='fas fa-question-circle mr-3'></i>FAQs</a>
+{% endblock %}
+
+
+{% block content %}
+    <section class='p-0 explore-section' style='margin-bottom: 100px'>
+        {% block display_search_filters %}
+        <header class='px-3 d-flex flex-lg-row flex-md-row flex-sm-column flex-column justify-content-md-between align-items-md-center mt-3 mb-4'>
+            <p id='explore-welcome-msg' class='m-0 text-uppercase text-white m-md-0 mb-sm-4 mb-4'></p>
+            <section class='d-flex align-items-center justify-content-between'>
+                <div class="filter-section filter-dropdown d-flex align-items-center justify-content-between">
+                    <a href="#" class='text-app mr-3 filter-link'>Filters <i class='fas fa-filter'></i></a>
+                    <form action='{% url "ebbeats:explore" %}' method="GET" class='filter-form filter-dropdown-content'>
+                        <div class="filter-fieldset">
+                            <label for="">Price:</label>
+                            <input type='number' name='price'>
+                        </div>
+                        <div class="filter-fieldset">
+                            <label for="">Album:</label>
+                            <select name="album" id="" value=''>
+                                <option value="">All</option>
+                                {% for album in albums %}
+                                    <option value="{{ album.pk }}">{{ album.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="filter-fieldset">
+                            <label for="">Genre:</label>
+                            <select name="genre" id="" value=''>
+                                <option value="">All</option>
+                                {% for genre in genres %}
+                                    <option value="{{ genre.pk }}">{{ genre.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="filter-fieldset">
+                            <label for="" class=''>Category:</label>
+                            <select name="category" id="" class='ml-1'>
+                                <option value="">All</option>
+                                <option value="b">Beats</option>
+                                <option value="dk">Drum Kits</option>
+                            </select>
+                        </div>
+                    
+                        <button class='btn-block filter-btn'>Apply Filter</button>
+                    </form>
+                </div>
+                <form action='{% url "ebbeats:explore" %}' method='GET' class='ml-2 query-form d-flex justify-content-center'>
+                    <input class='bg-transparent' type="text" name='query' id='query-input' placeholder="Search...">
+                    <button class='py-1 px-2'><i class='fas fa-search'></i></button>
+                </form>
+            </section>
+        </header>
+        {% endblock %}
+        
+        {% block render-section %}
+        <div class="row p-0 m-0">
+        {% for product in products %}
+            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                <div class="card mb-3 shadow-sm bg-dark">
+                    <img class="card-img-top" src='{{ product.album.album_cover.url }}' style="height: 225px; width: 100%; display: block;">
+                    <div class="card-body py-4 px-2">
+                        <div class='d-flex justify-content-between align-items-center'>
+                            <p class="card-text text-light">{{ product.name }}</p>
+                            <small class="text-white-50">${{ product.price }}</small>
+                        </div>
+                        <input type="hidden" name='product-id' id='product-id' value={{product.pk}}>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="#" class='btn btn-outline-light' title='Buy Now'><i class='fas fa-download'></i></a>
+                                <a href="#" class='btn btn-outline-light cart-btn' title='add to cart'><i class='fas fa-shopping-cart'></i> +</a>
+                            </div>
+                            <div class='preview-dropdown text-right'>
+                                <a href="#" class='product-details text-light'>Preview</a>
+                                <div class="preview-dropdown-content text-center">
+                                    <p>Album: <a href="{% url 'ebbeats:album-detail' product.album.pk %}" class='m-0 p-0'>{{ product.album.name }}</a></p>
+                                    <p>Genre: {% for genre in product.genre.filter %}{% if forloop.counter != product.genre.count %}{{ genre }}, {% else %} {{ genre }} {% endif %} {% endfor %}</p>
+                                    <p>Rating: ******</p>
+                                    <div class="d-flex justify-content-between align-items-center py-2 px-1">
+                                        <a href="#" class='preview-play-btn' title='preview'><i class='fas fa-play-circle fa-2x'></i><audio class='product-sample' src="{{ product.sample.url }}"></audio> </a>
+                                        <small class="text-muted">{{ product.duration }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        <div class="pagination my-3 px-3 d-flex justify-content-center align-items-center">
+            <span class="">
+                {% if products.has_previous %}
+                    <a href="{{request.path}}?page=1" class='btn btn-outline-danger'><i class="fas fa-angle-double-left"></i></a>
+                    <a href="{{request.path}}?page={{ products.previous_page_number }}" class='btn btn-outline-danger'><i class="fas fa-angle-left"></i></a>
+                {% else %}
+                    <a href="#" class='btn btn-secondary disabled'><i class="fas fa-angle-left"></i></a>
+                {% endif %}
+                <span class="current">
+                    <a href="?page={{products.number}}" class='btn btn-danger'>{{ products.number }}</a>
+                </span>
+                {% if products.has_next %}
+                    <a href="{{request.path}}?page={{ products.next_page_number }}" class='btn btn-outline-danger'><i class="fas fa-angle-right"></i></a>
+                    <a href="{{request.path}}?page={{ products.paginator.num_pages }}" class='btn btn-outline-danger'><i class="fas fa-angle-double-right"></i></a>
+                {% else %}
+                    <a href="#" class='btn btn-secondary disabled'><i class="fas fa-angle-right"></i></a>
+                {% endif %}
+            </span>
+        </div>
+        {% endblock %}
+    </section>
+
+{% endblock %}
+
+
+
+
+{% block extrascripts %}
+    <script>
+
+        // this is to ensure that focus falls on a card whose details btn was clicked or the preview link was clicked 
+        let cards = document.querySelectorAll('.card');
+        let previewBtns = document.querySelectorAll('.product-details');
+
+        previewBtns.forEach((btn,index) => {
+            btn.addEventListener('click', function(){
+                cards[index].scrollIntoView();
+            });
+        });
+
+        // for form validation 
+        let queryForm = $('.query-form');
+        let filterForm = $('.filter-form');
+
+        queryForm.on('submit', function(e){
+            if (queryForm.find('input[name="query"]').val() === ''){
+                e.preventDefault();
+                showAlert('Enter a query', 'danger', 3000, 'shake');
+            }
+        });
+
+
+        filterForm.on('submit', function(e){
+            if (filterForm.find('input[name="price"]').val() === '' && filterForm.find('select[name="album"]').val() === '' && filterForm.find('select[name="genre"]').val() === '' && filterForm.find('select[name="category"]').val() === ''){
+                e.preventDefault();
+                showAlert('Enter a value for filter', 'danger', 3000, 'shake');
+            }
+        });
+
+
+        new TypeIt('#explore-welcome-msg', {
+                speed: 50,
+                waitUntilVisible: true
+            })
+            .type("Happy Exploration")
+            .pause(3000)
+            .delete()
+            .type("Make use of the search for ease of exploration")
+            .pause(3000)
+            .delete()
+            .type('Apply filters for better sorting')
+            .pause(3000)
+            .delete()
+            .type('Preview and make purchases on desired items')
+            .go();
+        
+
+
+        // for the cart system of our application
+        let cartBtn = document.querySelectorAll('.cart-btn');
+        let products_id = document.querySelectorAll('#product-id');
+
+        cartBtn.forEach((btn, index) => {
+            let submitTrials = 0;
+            btn.addEventListener('click', function(){
+                submitTrials++;
+                $.get(`/ebbeats/add-to-cart/${products_id[index].value}/`)
+                    .done((res, status) => {
+                        if (res.message === 'failure'){
+                            console.log(status);
+                        }else if(res.message === 'present'){
+                            if (submitTrials >= 2){
+                                showAlert('Already in cart', 'dark', 5000, 'shake');
+                            }else{
+                                showAlert('Already in cart', 'dark', 5200, 'fadeIn');
+                            }
+                        }
+                        else{
+                            showAlert('Added to cart', 'info', 5500, 'fadeIn');
+                        }
+                    });
+            });
+        });
+
+
+        // for the preview play btns 
+        let previewPlayBtns = document.querySelectorAll('.preview-play-btn');
+        let beats = document.querySelectorAll('.product-sample');
+
+        previewPlayBtns.forEach((btn, index) => {
+            btn.addEventListener('click', function(){
+                handleControls(beats[index], btn, previewPlayBtns, beats, 'fa-2x');
+            });
+        });
+
+
+    </script>
+{% endblock %}

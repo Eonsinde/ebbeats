@@ -1,0 +1,147 @@
+{% extends 'ebbeats/index.html' %}
+
+
+{% block title %}Ebbeats -Contact Us{% endblock %}
+{% block extrastyles %}
+    <style>
+       .contact-form{
+           width: 100%;
+           margin: 20px auto;
+       }
+
+       .contact-form input{
+           outline: none;
+       }
+
+       .contact-form input:focus-within{
+           border-color: rgb(221, 51, 73);
+           box-shadow: none;
+       }
+
+       .contact-form textarea:focus-within{
+            border-color: rgb(221, 51, 73);
+            box-shadow: none;
+       }
+
+       .form-btn{
+            background: transparent;
+            color: #dc3545;
+            padding: 7px 11px;
+            border: 1px #dc3545 solid;
+            border-radius: 3px;
+            transition: .5s ease;
+        }
+
+        .form-btn:hover{
+            color: #eeeeee; 
+            background: #dc3545;
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #000000bc;
+        }
+
+        .form-btn:focus-within{
+            outline: none;
+        }
+
+        @media screen and (max-width: 768px){
+            .contact-form{
+                width: 100%;
+                margin: auto;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block navlinks %}
+<a href="{% url 'ebbeats:home' %}" class='navlink text-left text-uppercase'><i class='fas fa-home mr-3'></i>Home</a>
+<a href="{% url 'ebbeats:explore' %}" class='navlink text-left text-uppercase'><i class='fas fa-globe mr-3'></i>Explore</a>
+<a href="{% url 'ebbeats:contact' %}" class='navlink text-left text-uppercase active'><i class='fas fa-phone-alt mr-3'></i>Contact</a>
+<a href="{% url 'ebbeats:contribute' %}" class='navlink text-left text-uppercase'><i class='fas fa-gem mr-3'></i>Contribute</a>
+<a href="#" class='navlink text-left text-uppercase'><i class='fas fa-question-circle mr-3'></i>FAQs</a>
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="form-container">
+        <div class="row m-0 pb-4">
+            <div class="col-lg-4 col-md-4 bg-info col-sm-12 col-12">
+                <h1>Hello world</h1>
+            </div>
+            <div class="py-4 col-lg-8 col-md-8 bg-dark col-sm-12 col-12">
+                <h3 class='mt-1 contact-welcome-msg text-app text-uppercase'></h3>
+                <form method='POST' class='p-2 contact-form'>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name" class='text-app'>Name: </label>
+                        <input type="text" name='name' id='name' class='form-control bg-transparent text-white-50'>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class='text-app'>Email: </label>
+                        <input type="email" name='email' id='email' class='form-control bg-transparent text-white-50'>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject" class='text-app'>Subject: </label>
+                        <input type="text" name="subject" id='subject' class='form-control bg-transparent text-white-50'>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class='text-app'>Message: </label>
+                        <textarea name="message" id='message' class='form-control bg-transparent text-white-50'></textarea>
+                    </div>
+                    <div class='mt-4'>
+                        <button class='btn btn-outline-danger form-btn'>Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+{% endblock %}
+
+
+{% block extrascripts %}
+    <script>
+        new TypeIt('.contact-welcome-msg', {
+                speed: 50,
+                waitUntilVisible: true
+            })
+            .pause(1000)
+            .type('Contact Us <i class="fas fa-angle-double-right"></i>')
+            .go();
+
+
+        let contactForm = $('.contact-form');
+
+        let submitTrials = 0;
+        contactForm.on('submit', function(e){
+            submitTrials++;
+            e.preventDefault();
+
+            if (contactForm.find('input[name="name"]').val() === '' || contactForm.find('input[type="email"]').val() === '' || contactForm.find('input[name="subject"]').val() === '' || contactForm.find('input[type="message"]').val() === ''){
+                if (submitTrials >= 2){
+                    showAlert('Please fill in all fields', 'danger', 5000, 'shake');
+                }else{
+                    showAlert('Please fill in all fields', 'danger', 5200, 'fadeIn');
+                }
+            }else{
+                let new_contact = {
+                    'csrfmiddlewaretoken': contactForm.find('input[name="csrfmiddlewaretoken"]').val(),
+                    'person_name': contactForm.find('input[name="name"]').val(),
+                    'email': contactForm.find('input[name="email"]').val(),
+                    'subject': contactForm.find('input[name="subject"]').val(),
+                    'message': contactForm.find('textarea[name="message"]').val()
+                };
+                $.post('/ebbeats/contact/', new_contact)
+                    .done(res => {
+                        if (res.response === 'success'){
+                            showAlert('Message Successfully Sent', 'info', 5000, 'fadeIn');
+                        }else{
+                            showAlert('Message Not Sent; Try Again', 'danger', 3000, 'shake');
+                        }
+                    })
+            } // end of else if statement 
+        });
+
+    </script>
+{% endblock %}
+

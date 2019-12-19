@@ -1,0 +1,170 @@
+{% extends 'ebbeats/index.html' %}
+
+
+{% block title %}{{ album.name }} Album View{% endblock %}
+{% block extrastyles %}
+    <style>
+        .album-header{
+            height: 200px;
+            background:  linear-gradient(rgba(0, 0, 0, 0.356), rgba(0, 0, 0, 0.363)), url('{{ album.album_cover.url }}') center center;
+            background-size: contain;
+            position: relative;
+        }
+
+        .album-header-content{
+            position: absolute;
+            bottom: -40px;
+        }
+
+        .product-table{
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        th{
+            background: #343a40;
+        }
+
+        tr:nth-child(odd){
+            background: transparent;
+        }
+
+        tr:nth-child(even){
+            background: #343a40;
+        }
+
+        th, td{
+            padding: 10px 8px;
+        }
+
+        @media screen and (max-width: 768px){
+            .product-table{
+                width: 100%;
+                margin: auto;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block navlinks %}
+<a href="{% url 'ebbeats:home' %}" class='navlink text-left text-uppercase'><i class='fas fa-home mr-3'></i>Home</a>
+<a href="{% url 'ebbeats:explore' %}" class='navlink text-left text-uppercase'><i class='fas fa-globe mr-3'></i>Explore</a>
+<a href="{% url 'ebbeats:contact' %}" class='navlink text-left text-uppercase'><i class='fas fa-phone-alt mr-3'></i>Contact</a>
+<a href="{% url 'ebbeats:contribute' %}" class='navlink text-left text-uppercase'><i class='fas fa-gem mr-3'></i>Contribute</a>
+<a href="#" class='navlink text-left text-uppercase'><i class='fas fa-question-circle mr-3'></i>FAQs</a>
+{% endblock %}
+
+
+
+{% block content %}
+<section class='album-detail-section'>
+    <!-- <div class="container"> -->
+        <header class='album-header d-flex align-items-end'>
+            <div class='album-header-content px-4 d-flex justify-content-between align-items-center' style='width: 100%'>
+                <h1 class='text-app text-uppercase fa-4x'>{{ album.name }}</h1>
+                <button class='btn btn-danger text-white add-all-to-cart-btn' title="add all products to cart" style='border-radius: 100%; padding: 13px 10px'><i class='fas fa-shopping-cart'></i> +</button>
+            </div>
+        </header>
+
+        <article class='my-5'>
+            <table class='product-table'>
+                <thead>
+                    <tr class='text-danger'>
+                        <th class='text-center'>S/N</th>
+                        <th>Title</th>
+                        <th class='text-center'>Preview</th>
+                        <th class='text-center'>Duration</th>
+                        <th>Genre</th>
+                        <th class='text-center'>Price</th>
+                        <th class='text-center'>Add To Cart</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in album.product_set.all %}
+                        <tr class='text-app'>
+                            <td class='text-center'>{{ forloop.counter }}</td>
+                            <td>{{ item.name }}</td>
+                            <!-- <audio controls src="{{ item.file.url }}"></audio> -->
+                            <td class='text-center'><a href="#" class='handle-play-pause-btn text-white'><i class='fas fa-play-circle icon'></i><audio class='beat' src="{{ item.sample.url }}"></audio></a></td>
+                            <td class='text-center'>{{ item.duration }}</td>
+                            <td>{% for genre in item.genre.filter %}{% if forloop.counter != item.genre.count %}{{ genre }}, {% else %}{{ genre }}{% endif %}{% endfor %}</td>
+                            <td class='text-center'>${{ item.price }}</td>
+                            <td class='text-center'><button class='text-app bg-transparent border-0 add-to-cart-btn'><i class='fas fa-shopping-cart'></i> +</button></td>
+                        </tr>
+                        <input type="hidden" class='products-id' value={{item.pk}}>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </article>
+
+    <!-- </div>end of the container -->
+</section>
+{% endblock %}
+
+{% block extrascripts %}
+    <script>
+        // for the cart buttons
+        
+        let cartBtns = document.querySelectorAll('.add-to-cart-btn');
+        let productsID = document.querySelectorAll('.products-id');
+        cartBtns.forEach((btn, index) => {
+            let submitTrials = 0;
+            btn.addEventListener('click', function(){
+                submitTrials++;
+                $.get(`/ebbeats/add-to-cart/${productsID[index].value}/`)
+                    .done((res, status) => {
+                        if (res.message === 'failure'){
+                            console.log(status);
+                        }else if(res.message === 'present'){
+                            if (submitTrials >= 2){
+                                showAlert('Already in cart', 'dark', 5000, 'shake');
+                            }else{
+                                showAlert('Already in cart', 'dark', 5200, 'fadeIn');
+                            }
+                        }
+                        else{
+                            showAlert('Added to cart', 'info', 5500, 'fadeIn');
+                        }
+                    });
+            });
+        });
+
+        // for the add all to cart btn 
+        let addAllBtn = document.querySelector('.add-all-to-cart-btn');
+
+
+        let addAllTrials = 0;
+        addAllBtn.addEventListener('click', function(){
+            addAllTrials++;
+            let response = '';
+            productsID.forEach((product_id_input, index) => {
+                $.get(`/ebbeats/add-to-cart/${product_id_input.value}/`)
+                .done((res, status) => {
+                    return ;
+                }); // end of ajax section
+            }); // end of for each
+            
+            if (addAllTrials >= 2){
+                showAlert('All have been added to cart', 'info', 5000, 'shake');
+            }else{
+                showAlert('All have been added to cart', 'info', 5200, 'fadeIn');
+            }
+           
+        });
+
+
+        // for the controls
+        let controlBtns = document.querySelectorAll('.handle-play-pause-btn');
+        let icons = document.querySelectorAll('.handle-play-pause-btn i.fas');
+        let beats = document.querySelectorAll('.beat');
+
+
+        controlBtns.forEach((btn,index) => {
+            btn.addEventListener('click', function(){
+                handleControls(beats[index], btn, controlBtns, beats);
+            });
+        });
+
+    </script>
+{% endblock %}
+
