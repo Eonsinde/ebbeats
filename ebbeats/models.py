@@ -3,6 +3,7 @@ from django.utils import timezone
 import datetime
 from django.conf import settings
 from decimal import Decimal
+from django.core.files.storage import FileSystemStorage
 
 # payment imports
 from payments import PurchasedItem
@@ -100,9 +101,9 @@ class Order(models.Model):
 
 # other details for the user model
 class Image(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
-    profile_image = models.ImageField(upload_to='profile_images/')
-    cover_image = models.ImageField(upload_to='cover_images/')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
+    cover_image = models.ImageField(upload_to='cover_images/', null=True, blank=True)
 
     def __str__(self):
         return self.user.username + ' related images'
