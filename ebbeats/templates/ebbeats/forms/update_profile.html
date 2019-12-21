@@ -1,6 +1,6 @@
 {% extends 'ebbeats/index.html' %}
 
-{% block title %}Ebbeats - Edit Profile{% endblock %}
+{% block title %}Edit Profile{% endblock %}
 
 {% block extrastyles %}
     <style>
@@ -98,7 +98,7 @@
             </div>
         </div>
         <div class="mt-1 mb-2 px-2">
-            <button href="#" class='form-btn'>Submit Updates</button>
+            <button href="#" class='form-btn'>Submit Changes</button>
         </div>
     </form>
 </section>
@@ -124,7 +124,7 @@
 
             if (updateForm.find('input[name="profile-image"]').val() === '' && updateForm.find('input[name="cover-image"]').val() === '' && updateForm.find('input[name="username"]').val() === '' && updateForm.find('input[name="email"]').val() === '' && updateForm.find('input[name="password"]').val() === ''){
                 e.preventDefault();
-                showAlert("Please fill in all fields", 'danger', 5000, 'fadeIn');
+                showAlert("Please fill in a field", 'danger', 5000, 'fadeIn');
             }
         });
     </script>

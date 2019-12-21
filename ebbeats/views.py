@@ -9,8 +9,6 @@ from ebbeats.filters import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.core.files.storage import FileSystemStorage
-import os
 from django.conf import settings
 
 # payment thingy
@@ -121,16 +119,18 @@ def update_profile(request):
                 user.set_password = request.POST['password']
             if request.FILES.get('profile-image'):
                 my_file = request.FILES.get('profile-image')
-                fs = FileSystemStorage(location='media/profile_images/')
-                file_name = fs.save(my_file.name, my_file)
-                new_image_path = fs.path(file_name)
-                user.image.profile_image.name = 'profile_images/' + file_name
-                print(user.image.profile_image.name)
-
-                # user.image.profile_image.path = new_image_path
-
+                if user.image.profile_image:
+                    user.image.profile_image.delete()
+                    user.image.profile_image = my_file
+                user.image.profile_image = my_file
+                user.image.save()
             if request.FILES.get('cover-image'):
-                user.image.cover_image = request.FILES.get('cover-image')
+                my_file = request.FILES.get('cover-image')
+                if user.image.cover_image:
+                    user.image.cover_image.delete()
+                    user.image.cover_image = my_file
+                user.image.cover_image = my_file
+                user.image.save()
             user.save()
             return HttpResponseRedirect('/ebbeats/dashboard/')
     return render(request, 'ebbeats/forms/update_profile.html')

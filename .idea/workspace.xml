@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b266219-d15a-4632-9c06-2943d6ca5dc7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ebbeats/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/ebbeats/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ebbeats/templates/ebbeats/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/ebbeats/templates/ebbeats/cart.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ebbeats/templates/ebbeats/forms/update_profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/ebbeats/templates/ebbeats/forms/update_profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ebbeats/templates/ebbeats/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ebbeats/templates/ebbeats/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ebbeats/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ebbeats/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicproj/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/musicproj/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,7 +22,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/musicproj/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
+            <state relative-caret-position="2295">
               <caret line="135" selection-start-line="135" selection-end-line="135" />
             </state>
           </provider>
@@ -56,8 +55,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ebbeats/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="105" column="84" selection-start-line="105" selection-start-column="84" selection-end-line="105" selection-end-column="84" />
+            <state relative-caret-position="714">
+              <caret line="51" column="43" selection-start-line="51" selection-start-column="43" selection-end-line="51" selection-end-column="43" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -68,7 +67,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ebbeats/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
+            <state relative-caret-position="289">
               <caret line="18" column="73" selection-start-line="18" selection-start-column="73" selection-end-line="18" selection-end-column="73" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
@@ -80,8 +79,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ebbeats/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="125" column="51" lean-forward="true" selection-start-line="125" selection-start-column="51" selection-end-line="125" selection-end-column="51" />
+            <state relative-caret-position="510">
+              <caret line="135" column="63" lean-forward="true" selection-start-line="135" selection-start-column="63" selection-end-line="135" selection-end-column="63" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
               </folding>
@@ -257,7 +256,7 @@
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4979424" visible="true" weight="0.13020833" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4979424" visible="true" weight="0.13020833" />
       <window_info id="Structure" order="1" show_stripe_button="false" sideWeight="0.5020576" side_tool="true" weight="0.122023806" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -270,7 +269,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="9" />
-      <window_info active="true" anchor="bottom" x="17" y="306" width="1332" height="155" id="Terminal" order="10" sideWeight="0.4985119" visible="true" weight="0.2642089" />
+      <window_info anchor="bottom" x="17" y="306" width="1332" height="155" id="Terminal" order="10" sideWeight="0.4985119" visible="true" weight="0.2642089" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -447,6 +446,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/media/7dd8449a248011e3852322000ae911da_7_Lv548oK.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/7dd8449a248011e3852322000ae911da_7_fOxvjVU.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/7dd8449a248011e3852322000ae911da_7.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/profile_images/79423791_1189212147943742_9093310076260712448_o.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/profile_images/7dd8449a248011e3852322000ae911da_7_S6eKAlY.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/profile_images/7dd8449a248011e3852322000ae911da_7_yjQwuZJ.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/profile_images/7dd8449a248011e3852322000ae911da_7.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/profile_images/32948670_781924168672544_8723517214596005888_o_oQi9QP0.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/79423791_1189212147943742_9093310076260712448_o.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/profile_images/Passport.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/profile_images/33027661_782381691960125_7769709470413750272_o.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/profile_images/IMG_20170813_140044.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/profile_images/32948670_781924168672544_8723517214596005888_o_jFHQtqj.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/profile_images/32948670_781924168672544_8723517214596005888_o.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/test/IMG_20170813_135902.jpg" />
+    <entry file="file://$PROJECT_DIR$/media/profile_images/32948670_781924168672544_8723517214596005888_o_SRcPKf9.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/media/profile_images/IMG_20170813_135902.jpg" />
+    <entry file="file://$PROJECT_DIR$/musicproj/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2295">
+          <caret line="135" selection-start-line="135" selection-end-line="135" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/musicproj/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -467,9 +492,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ebbeats/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="51" column="43" selection-start-line="51" selection-start-column="43" selection-end-line="51" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ebbeats/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
+        <state relative-caret-position="289">
           <caret line="18" column="73" selection-start-line="18" selection-start-column="73" selection-end-line="18" selection-end-column="73" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
@@ -477,72 +512,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/media/7dd8449a248011e3852322000ae911da_7_Lv548oK.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/7dd8449a248011e3852322000ae911da_7_fOxvjVU.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/7dd8449a248011e3852322000ae911da_7.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/profile_images/79423791_1189212147943742_9093310076260712448_o.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/profile_images/7dd8449a248011e3852322000ae911da_7_S6eKAlY.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/profile_images/7dd8449a248011e3852322000ae911da_7_yjQwuZJ.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/profile_images/7dd8449a248011e3852322000ae911da_7.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/profile_images/32948670_781924168672544_8723517214596005888_o_oQi9QP0.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/79423791_1189212147943742_9093310076260712448_o.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/musicproj/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="135" selection-start-line="135" selection-end-line="135" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/profile_images/Passport.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/profile_images/33027661_782381691960125_7769709470413750272_o.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ebbeats/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="105" column="84" selection-start-line="105" selection-start-column="84" selection-end-line="105" selection-end-column="84" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/profile_images/IMG_20170813_140044.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/profile_images/32948670_781924168672544_8723517214596005888_o_jFHQtqj.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/profile_images/IMG_20170813_135902.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media/profile_images/32948670_781924168672544_8723517214596005888_o.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/ebbeats/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="125" column="51" lean-forward="true" selection-start-line="125" selection-start-column="51" selection-end-line="125" selection-end-column="51" />
+        <state relative-caret-position="510">
+          <caret line="135" column="63" lean-forward="true" selection-start-line="135" selection-start-column="63" selection-end-line="135" selection-end-column="63" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
           </folding>
