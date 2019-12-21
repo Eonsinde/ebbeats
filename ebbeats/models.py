@@ -51,7 +51,8 @@ class Rating(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=200)
     price = models.FloatField()
-    discount_price = models.FloatField(null=True, blank=True)
+    discount_price = models.FloatField(null=True, blank=True, default=Decimal(1),
+                                       help_text="Enter discount in decimal format; e.g 25/100 = .25")
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
     genre = models.ManyToManyField(Genre)
     duration = models.DurationField(default=timezone.now)
@@ -70,8 +71,11 @@ class Product(models.Model):
     def get_recently_released(self):
         return self.release_date >= timezone.now().date() - datetime.timedelta(days=7)
 
+    def get_actual_price(self):
+        return self.discount_price * self.price
+
     class Meta:
-        ordering = ['release_date']
+        ordering = ['-release_date']
 
 
 class OrderItem(models.Model):

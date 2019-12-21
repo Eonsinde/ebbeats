@@ -119,17 +119,19 @@ def update_profile(request):
                 user.set_password = request.POST['password']
             if request.FILES.get('profile-image'):
                 my_file = request.FILES.get('profile-image')
-                if user.image.profile_image:
+                if user.image:
                     user.image.profile_image.delete()
                     user.image.profile_image = my_file
-                user.image.profile_image = my_file
+                else:
+                    user.image.profile_image = my_file
                 user.image.save()
             if request.FILES.get('cover-image'):
                 my_file = request.FILES.get('cover-image')
                 if user.image.cover_image:
                     user.image.cover_image.delete()
                     user.image.cover_image = my_file
-                user.image.cover_image = my_file
+                else:
+                    user.image.cover_image = my_file
                 user.image.save()
             user.save()
             return HttpResponseRedirect('/ebbeats/dashboard/')
@@ -193,7 +195,11 @@ def remove_from_cart(request, pk):
 
 @login_required
 def checkout(request):
-    return render(request, 'ebbeats/checkout.html')
+    order = Order.objects.get(user=request.user)
+    context = {
+        'cart': order.items.all()
+    }
+    return render(request, 'ebbeats/checkout.html', context)
 
 
 def forms(request):
@@ -211,7 +217,8 @@ def signup(request):
             new_user.email = request.POST['email']
             new_user.set_password(request.POST['password'])
             new_user.save()
-
+            new_img_instance = Image.objects.create(user=new_user, profile_image='', cover_image='')
+            new_img_instance.save()
             return render(request, 'ebbeats/forms/forms.html', {'message': 'Account successfully created; login'})
         else:
             return render(request, 'ebbeats/forms/forms.html', {'message': "Validation Error; check that all fields are filled"})

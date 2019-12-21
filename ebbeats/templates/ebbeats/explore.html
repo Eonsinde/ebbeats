@@ -27,6 +27,10 @@
             color: #ecebeb;
         }
 
+        .card{
+            border: 1px #313030 solid;
+        }
+
         .filter-dropdown{
             position: relative;
         }
@@ -34,7 +38,7 @@
         .filter-dropdown-content{
             border: 1px white solid;
             display: none;
-            background:#343a40;
+            background:#212122;
             position: absolute;
             z-index: 3;
             top: 44px;
@@ -74,7 +78,7 @@
 
         .filter-fieldset select option{
             box-sizing: border-box;
-            background: #343a40;
+            background: #272829;
         }
 
         .filter-link{
@@ -105,7 +109,7 @@
         .preview-dropdown-content{
             display: none;
             position: absolute;
-            background: #343a40;
+            background: #212122;
             width: 250px;
             z-index: 3;
             padding: 20px 10px;
@@ -163,7 +167,7 @@
 
 
 {% block content %}
-    <section class='p-0 explore-section' style='margin-bottom: 100px'>
+    <section class='p-0 explore-section bg-dark py-2' style='margin-bottom: 100px'>
         {% block display_search_filters %}
         <header class='px-3 d-flex flex-lg-row flex-md-row flex-sm-column flex-column justify-content-md-between align-items-md-center mt-3 mb-4'>
             <p id='explore-welcome-msg' class='m-0 text-uppercase text-white m-md-0 mb-sm-4 mb-4'></p>
@@ -217,9 +221,9 @@
         <div class="row p-0 m-0">
         {% for product in products %}
             <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                <div class="card mb-3 shadow-sm bg-dark">
+                <div class="card mb-3 shadow-sm bg-transparent">
                     <img class="card-img-top" src='{{ product.album.album_cover.url }}' style="height: 225px; width: 100%; display: block;">
-                    <div class="card-body py-4 px-2">
+                    <div class="card-body py-4 px-2" style="border-top: 1px #313030 solid">
                         <div class='d-flex justify-content-between align-items-center'>
                             <p class="card-text text-light">{{ product.name }}</p>
                             <small class="text-white-50">${{ product.price }}</small>

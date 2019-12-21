@@ -1,7 +1,7 @@
 {% extends 'ebbeats/index.html' %}
 
 
-{% block title %}Kevibes  -Contact Us{% endblock %}
+{% block title %}Kevibes - Contact Us{% endblock %}
 {% block extrastyles %}
     <style>
        .contact-form{
@@ -65,8 +65,8 @@
 {% block content %}
     <div class="form-container">
         <div class="row m-0 pb-4">
-            <div class="col-lg-4 col-md-4 bg-info col-sm-12 col-12">
-                <h1>Hello world</h1>
+            {% load static %}
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12" style='background: url({% static "ebbeats/images/black-and-gray-telephone-booth-2111759.jpg" %}) center center/cover'>
             </div>
             <div class="py-4 col-lg-8 col-md-8 bg-dark col-sm-12 col-12">
                 <h3 class='mt-1 contact-welcome-msg text-app text-uppercase'></h3>

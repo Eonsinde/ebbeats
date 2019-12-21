@@ -12,6 +12,10 @@ body{
     background: #373e44;
 }
 
+.bg-dark{
+    background: #212122 !important;
+}
+
 .text-app{
     color: #ecebeb;
 }
@@ -195,9 +199,22 @@ footer{
     box-sizing: border-box;
     height: 100vh;
     overflow-y: auto;
-    background: #373e44;
+    background: linear-gradient(rgba(0,0,0,.5), rgba(0, 0, 0, 0.281)), url('./images/colorful_vintage_stripes-wallpaper-2560x1600.jpg') center center/cover;
+    /* background: #232425; */
     position: relative;
     overflow-x: hidden;
+}
+
+.home-content{
+    /* background: linear-gradient(rgba(0,0,0,.5), rgba(0, 0, 0, 0.281)), url('./images/colorful_vintage_stripes-wallpaper-2560x1600.jpg') center center/cover; */
+}
+
+.owl-carousel{
+    position: absolute;
+    width: 96.5%;
+    bottom: 75px;
+    box-sizing: border-box;
+    margin: 0;
 }
 
 .owl-stage{

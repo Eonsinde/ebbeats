@@ -1,7 +1,7 @@
 {% extends 'ebbeats/index.html' %}
 
 
-{% block title %}{{ album.name }} Album View{% endblock %}
+{% block title %}{{ album.name|title }} Album View{% endblock %}
 {% block extrastyles %}
     <style>
         .album-header{
@@ -21,16 +21,13 @@
             box-sizing: border-box;
         }
 
-        th{
-            background: #343a40;
-        }
-
         tr:nth-child(odd){
-            background: transparent;
+            /* background: transparent; */
+            background: #242525;
         }
 
         tr:nth-child(even){
-            background: #343a40;
+            background: #212122;
         }
 
         th, td{
@@ -61,7 +58,7 @@
     <!-- <div class="container"> -->
         <header class='album-header d-flex align-items-end'>
             <div class='album-header-content px-4 d-flex justify-content-between align-items-center' style='width: 100%'>
-                <h1 class='text-app text-uppercase fa-4x'>{{ album.name }}</h1>
+                <h1 class='text-app text-uppercase fa-4x' style='text-shadow: 0 0 10px #000000bc;'>{{ album.name }}</h1>
                 <button class='btn btn-danger text-white add-all-to-cart-btn' title="add all products to cart" style='border-radius: 100%; padding: 13px 10px'><i class='fas fa-shopping-cart'></i> +</button>
             </div>
         </header>
@@ -69,7 +66,7 @@
         <article class='my-5'>
             <table class='product-table'>
                 <thead>
-                    <tr class='text-danger'>
+                    <tr class='text-danger bg-dark'>
                         <th class='text-center'>S/N</th>
                         <th>Title</th>
                         <th class='text-center'>Preview</th>
@@ -90,8 +87,8 @@
                             <td>{% for genre in item.genre.filter %}{% if forloop.counter != item.genre.count %}{{ genre }}, {% else %}{{ genre }}{% endif %}{% endfor %}</td>
                             <td class='text-center'>${{ item.price }}</td>
                             <td class='text-center'><button class='text-app bg-transparent border-0 add-to-cart-btn'><i class='fas fa-shopping-cart'></i> +</button></td>
+                            <input type="hidden" class='products-id' value={{item.pk}}>
                         </tr>
-                        <input type="hidden" class='products-id' value={{item.pk}}>
                     {% endfor %}
                 </tbody>
             </table>

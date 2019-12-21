@@ -17,15 +17,15 @@
         }
 
         th{
-            background: #343a40;
+            background: #212122;
         }
 
         tr:nth-child(odd){
-            background: transparent;
+            background: #242525;
         }
 
         tr:nth-child(even){
-            background: #343a40;
+            background: #212122;
         }
 
         th, td{
@@ -48,8 +48,8 @@
         }
 
         .form-btn{
-            background: transparent;
-            color: #dc3545;
+            background: #dc3545;
+            color: #ecebeb;
             padding: 7px 11px;
             border: 1px #dc3545 solid;
             border-radius: 3px;
@@ -57,14 +57,13 @@
         }
 
         .form-btn:nth-child(2){
-            background: transparent;
-            color: #3b9ad4;
+            background: #3b9ad4;
+            color: #ecebeb;
             border: 1px #3b9ad4 solid;
         }
 
         .form-btn:hover{
-            color: #eeeeee; 
-            background: #dc3545;
+            color: #ecebeb;
             transform: scale(1.02);
             box-shadow: 0 0 10px #000000bc;
         }
@@ -108,7 +107,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <div class='border-top border-dark p-3 mt-3 text-right'>
+            <div class='p-3 mt-3 text-right' style='border-top: 1px #2222227c  solid;'>
                 <a href='{% url "ebbeats:explore" %}' class='form-btn'>Continue Shopping</a>
                 <a href='{% url "ebbeats:checkout" %}' class='form-btn'>Proceed to checkout</a>
             </div>

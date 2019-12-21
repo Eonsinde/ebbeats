@@ -77,15 +77,15 @@
         </nav>
         <main class='main-content'>
             {% block content %}
-            <section class="home-content d-flex flex-column justify-content-center align-items-center py-5">
-                <h1 style='display: block; margin: 45px 0px 30px 0px;' id='message-input' class='text-uppercase text-center text-app' style='display: block'></h1>
-                <h3 class='text-app text-center py-3'>Latest Releases</h3>
+            <section class="p-2 home-content" style='height: 90vh;'>
+                <h1 style='display: block; margin-top: 143px' id='message-input' class='text-uppercase text-center text-app'></h1>
+                <h3 class='text-app text-center py-3' style='position: absolute; bottom: 310px; z-index: 2; width: 96.5%;'>Latest Releases</h3>
                 <div class="owl-carousel owl-theme">
-                    {% for product in products %}
+                     {% for product in products %}
                         {% if forloop.counter <= 6  %}
                             <div class="">
                                 <div class="product-placement bg-dark" style='position:relative;'>
-                                    <img src="{% static 'ebbeats/images/low-angle-view-of-spiral-staircase-against-black-background-247676.jpg' %}" style='opacity: .7;' height="100%" width="100%" alt="{{ product }} album cover image">
+                                    <img src="{% static 'ebbeats/images/colorful_vintage_stripes-wallpaper-2560x160.jpg' %}" style='opacity: .7;' height="100%" width="100%" alt="{{ product }} album cover image">
                                     <div class="product-detail-dropdown slide-right d-flex align-items-center justify-content-center" style="background: linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)), url('{{ product.album.album_cover.url }}') center center; background-size: cover;">
                                         <div class='text-app'>
                                             <div>Album: {{ product.album }}</div>
@@ -129,7 +129,7 @@
             speed: 50,
             waitUntilVisible: true
         })
-        .type('Welcome to ebbeats')
+        .type('Welcome to kevibes')
         .pause(3000)
         .delete()
         .type('Purchase<br> music beats, drum kits and loops')

@@ -4,7 +4,45 @@
 
 {% block extrastyles %}
     <style>
-    
+        form.donate-form{
+
+        }
+
+        .donate-form input{
+            background:  none;
+            padding: 7px 11px;
+            border: 1px #ecebec solid;
+            color: #dddcdc;
+            transition: .3s ease;
+            outline: none;
+            box-sizing: border-box;
+            /* display: block; */
+        }
+
+        .donate-form input:focus{
+            border-color: #dc3545;
+        }
+
+        .form-btn{
+            background: transparent;
+            color: #dc3545;
+            padding: 7px 11px;
+            border: 1px #dc3545 solid;
+            border-radius: 3px;
+            transition: .5s ease;
+            box-sizing: border-box;
+        }
+
+        .form-btn:hover{
+            color: #eeeeee; 
+            background: #dc3545;
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #000000bc;
+        }
+
+        .form-btn:focus-within{
+            outline: none;
+        }
     </style>
 {% endblock %}
 
@@ -18,27 +56,54 @@
 
 
 {% block content %}
-    <!-- <form id="paystack-card-form">
-        <input type="text" data-paystack="number">
-        <input type="text" data-paystack="cvv">            
-        <input type="text" data-paystack="expiryMonth">
-        <input type="text"  data-paystack="expiryYear">
-        <button type="submit" data-paystack="submit">Submit</button>
-      </form> -->
-    <form >
-        <script src="https://js.paystack.co/v1/inline.js"></script>
-        <button type="button" onclick="payWithPaystack()"> Pay </button> 
-    </form>
+    <section class="contribute-container d-flex justify-content-center text-center align-items-center" style='height: 92vh'>
+        <div class="contribute-section px-5">
+            <h1 class='contribute-welcome-msg text-app mt-0'></h1>
+            <form class='wow fadeInUp mt-4 donate-form'>
+                <input type="email" placeholder="Email">
+                <input type="number" id='phone-no' placeholder="Phone no">
+                <input type="number" name="amount" id="" placeholder="amount">
+                <button class='form-btn' type="button" id='pay-btn'> Donate </button> 
+            </form>
+        </div>
+    </section>
+    
 {% endblock %}
 
 
 {% block extrascripts %}
+    <script src="https://js.paystack.co/v1/inline.js"></script>
     <script>
-        function payWithPaystack(){
+
+        new TypeIt('.contribute-welcome-msg', {
+            speed: 50,
+            waitUntilVisible: true
+        })
+        .type('make contributions to our application by monetary donation')
+        .go()
+
+        // handlePayment 
+        let paymentForm = document.querySelector('.donate-form');
+        let emailInput = document.querySelector('input[type="email"]');
+        let phoneNoInput = document.querySelector('#phone-no');
+        let amountDonatedInput = document.querySelector('input[name="amount"]');
+        let payBtn = document.querySelector('#pay-btn');
+        payBtn.addEventListener('click', function(){
+            if (emailInput.value === '' || amountDonatedInput.value === ''){
+                showAlert("Please fill in all fields", 'danger', 5000, 'fadeIn');
+            }else{
+                strPhoneNo = String(phoneNoInput.value);
+                formattedPhoneNo = strPhoneNo.slice(1, strPhoneNo.length-1);
+                payWithPaystack(emailInput.value, formattedPhoneNo, amountDonatedInput.value);
+            }
+        });
+
+        // for payment 
+        function payWithPaystack(email, phone_no, amount){
             var handler = PaystackPop.setup({
-            key: 'pk_test_7ac97f42b0cb3f6c4f2c24c423491cf5903d8054',
-            email: 'olasinde.eon@gmail.com',
-            amount: 10000,
+            key: 'pk_live_5efc1f9ce5eda5b2050c8152350853b1adb814b3',
+            email: email,
+            amount: amount * 100, 
             currency: "NGN",
             ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
             metadata: {
@@ -46,7 +111,7 @@
                     {
                         display_name: "Mobile Number",
                         variable_name: "mobile_number",
-                        value: "+2347010237194"
+                        value: '+234' + phone_no
                     }
                 ]
             },

@@ -58,11 +58,11 @@
     }
 
     .list-group-item:nth-child(odd){
-      background: #343a40;
+      background: #212122;
     }
 
     .list-group-item:nth-child(even){
-      background: #373e44;
+      background: #242525;
     }
 
     .promo-input:focus-within{
@@ -72,6 +72,7 @@
 {% endblock %}
 
 {% block content %}
+{% load cart_template_tag %}
 <section class="checkout-container mb-5">
     <div class="container wow fadeIn">
       <h2 class="my-2 mb-4 checkout-welcome-msg text-app"></h2>
@@ -80,127 +81,24 @@
         <div class="col-md-8 mb-4"> <!-- left side -->
           <div class="card bg-dark">
             <form class="card-body billing-form">
-              <div class="row mb-4">
-                <div class="col-md-6 mb-2">
-                  <div class="">
-                    <label for="firstName" class="text-app">First name</label>
-                    <input type="text" id="firstName" class="bg-transparent text-white-50">
-                  </div>
-                </div>
-                <div class="col-md-6 mb-2">
-                  <div class="">
-                    <label for="lastName" class="text-app">Last name</label>
-                    <input type="text" id="lastName" class="bg-transparent text-white-50">
-                  </div>
-                </div>
+              <div class="col-md-12 mb-3">
+                <label for="cc-email text-app">Email</label>
+                <input type="email" class="text-white-50 bg-transparent" id="cc-email" placeholder="">
+                <small class="text-muted">Enter your email address</small>
               </div>
-              <div class="input-group pl-0 mb-5">
-                <div class="input-group-prepend">
-                  <span class="input-group-text bg-transparent text-white" id="basic-addon1">@</span>
-                </div>
-                <input type="text" class="form-control bg-transparent text-white-50" placeholder="Username" aria-describedby="basic-addon1">
+              <div class="col-md-12 mb-3">
+                <label for="cc-name text-app">Phone Number</label>
+                <input type="text" class="text-white-50 bg-transparent" id="cc-name" placeholder="">
+                <small class="text-muted">Enter your phone number</small>
               </div>
-              <div class="mb-5">
-                <label for="email" class="text-app">Email (optional)</label>
-                <input type="text" id="email" class="bg-transparent text-white-50" placeholder="youremail@example.com">
+              <div class="col-md-12 mb-3">
+                <label for="phone-no text-app">Amount</label>
+                <input type="text" class="text-white-50 bg-transparent" id="phone-no" placeholder="">
+                <small class="text-muted">This field holds the total price of items in your cart</small>
               </div>
-              <div class="mb-5">
-                <label for="address" class="text-app">Address</label>
-                <input type="text" id="address" class="bg-transparent text-white-50" placeholder="1234 Main St">
-              </div>
-              <div class="mb-5">
-                <label for="address-2" class="text-app">Address 2 (optional)</label>
-                <input type="text" id="address-2" class="bg-transparent text-white-50" placeholder="Apartment or suite">
-              </div>
-
-              <div class="row">
-                <div class="col-lg-4 col-md-12 mb-4">
-                  <label for="country">Country</label>
-                  <select class="custom-select d-block w-100" id="country" class='' required>
-                    <option value="">Choose...</option>
-                    <option>United States</option>
-                  </select>
-                  <div class="invalid-feedback">
-                    Please select a valid country.
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                  <label for="state">State</label>
-                  <select class="custom-select d-block w-100" id="state" required>
-                    <option value="">Choose...</option>
-                    <option>California</option>
-                  </select>
-                  <div class="invalid-feedback">
-                    Please provide a valid state.
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                  <label for="zip">Zip</label>
-                  <input type="text" class="form-control" id="zip" placeholder="" required>
-                  <div class="invalid-feedback">
-                    Zip code required.
-                  </div>
-                </div>
-              </div>
-              <hr>
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input bg-transparent text-white-50" id="same-address">
-                <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
-              </div>
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input bg-transparent text-white-50" id="save-info">
-                <label class="custom-control-label" for="save-info">Save this information for next time</label>
-              </div>
-              <hr>
-              <div class="d-block my-3">
-                <div class="custom-control custom-radio">
-                  <input id="credit" name="paymentMethod" type="radio" class="custom-control-input bg-transparent text-white-50" checked required>
-                  <label class="custom-control-label" for="credit">Credit card</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-                  <label class="custom-control-label" for="debit">Debit card</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-                  <label class="custom-control-label" for="paypal">Paypal</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                  <label for="cc-name text-app">Name on card</label>
-                  <input type="text" class="text-white-50 bg-transparent" id="cc-name" placeholder="" required>
-                  <small class="text-muted">Full name as displayed on card</small>
-                  <div class="invalid-feedback">
-                    Name on card is required
-                  </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                  <label for="cc-number text-app">Credit card number</label>
-                  <input type="text" class="text-white-50 bg-transparent" id="cc-number" placeholder="" required>
-                  <div class="invalid-feedback">
-                    Credit card number is required
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-3 mb-3">
-                  <label for="cc-expiration text-app">Expiration</label>
-                  <input type="text" class="text-white-50 bg-transparent" id="cc-expiration" placeholder="" required>
-                  <div class="invalid-feedback">
-                    Expiration date required
-                  </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                  <label for="cc-expiration text-app">CVV</label>
-                  <input type="text" class="text-white-50 bg-transparent" id="cc-cvv" placeholder="" required>
-                  <div class="invalid-feedback">
-                    Security code required
-                  </div>
-                </div>
-              </div>
+             
               <hr class="mb-4">
-              <button class="form-btn btn-block" type="submit">Continue to checkout</button>
+              <button class="form-btn btn-block" type="submit">checkout</button>
             </form>
           </div>
         </div><!-- end of the left side -->
@@ -208,41 +106,19 @@
         <div class="col-md-4 mb-4"> <!-- right side -->
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-app">Your cart</span>
-            <span class="badge badge-danger badge-pill">3</span>
+            <span class="badge badge-danger badge-pill">{{ request.user|cart_item_count }}</span>
           </h4>
           <ul class="list-group mb-3 z-depth-1">
+            {% for ord_item in cart %}
             <li class="list-group-item text-app d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">Product name</h6>
-                <small class="text-muted">Brief description</small>
+                <a href="{% url 'ebbeats:album-detail' ord_item.item.album.pk %}" class="my-0 text-app d-block">{{ ord_item.item }}</a>
+                <small class="text-muted">{{ ord_item.item.album }}</small>
               </div>
-              <span class="text-muted">$12</span>
+              <span class="text-muted">${{ ord_item.item.price }}</span>
+              <input type="hidden" value={{ord_item.item}}>
             </li>
-            <li class="list-group-item text-app d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Second product</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$8</span>
-            </li>
-            <li class="list-group-item text-app d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Third item</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$5</span>
-            </li>
-            <li class="list-group-item text-app d-flex justify-content-between">
-              <div class="text-danger">
-                <h6 class="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
-              </div>
-              <span class="text-danger">-$5</span>
-            </li>
-            <li class="list-group-item text-app d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>$20</strong>
-            </li>
+            {% endfor %}
           </ul>
           <form class="card p-2 bg-dark">
             <div class="input-group">
@@ -268,5 +144,7 @@
       .pause(1000)
       .type('Checkout <i class="fas fa-angle-double-right"></i>')
       .go();
+
+
   </script>
 {% endblock %}
