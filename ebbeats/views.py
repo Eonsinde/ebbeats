@@ -26,35 +26,37 @@ def index(request):
 
 
 def explore(request):
-    if request.method == 'GET':
-        products = Product.objects.all()
-        albums = Album.objects.all()
-        genres = Genre.objects.all()
-        if request.GET.get('query'):
-            query = request.GET.get('query')
-            products = products.filter(name__icontains=f'{query}')
-            print('Search: ', products)
-            paginator = Paginator(products, 1)
-            page = request.GET.get('page')
-            products_list = paginator.get_page(page)
-            context = {'products': products_list, 'albums': albums, 'genres': genres}
-            return render(request, 'ebbeats/explore.html', context)
-        elif request.GET.get('album') or request.GET.get('category') or request.GET.get('genre') or request.GET.get('price'):
-            print(products)
-            f = ProductFilter(request.GET, queryset=products)
-            print('filtering')
-            print(f.qs)
-            paginator = Paginator(f.qs, 1)
-            page = request.GET.get('page')
-            products_list = paginator.get_page(page)
-            context = {'products': products_list, 'albums': albums, 'genres': genres}
-            return render(request, 'ebbeats/explore.html', context)
-        else:
-            paginator = Paginator(products, 9)
-            page = request.GET.get('page')
-            products_list = paginator.get_page(page)
-            context = {'products': products_list, 'albums': albums, 'genres': genres}
-            return render(request, 'ebbeats/explore.html', context)
+    products = Product.objects.all()
+    albums = Album.objects.all()
+    genres = Genre.objects.all()
+    if request.method == 'GET' and request.GET.get('query'):
+        query = request.GET.get('query')
+        products = products.filter(name__icontains=f'{query}')
+        # print('Search: ', products)
+        paginator = Paginator(products, 1)
+        page = request.GET.get('search')
+        print("\nI'm under the query get")
+        print("Page gotten: ", page)
+        products_list = paginator.get_page(page)
+        context = {'products': products_list, 'albums': albums, 'genres': genres, 'query': True}
+        return render(request, 'ebbeats/explore.html', context)
+    elif request.method == 'GET' and (request.GET.get('album') or request.GET.get('category') or request.GET.get('genre') or request.GET.get('price')):
+        f = ProductFilter(request.GET, queryset=products)
+        paginator = Paginator(f.qs, 1)
+        print("\nI'm under the filter get")
+        page = request.GET.get('page')
+        print("Page gotten: ", page)
+        products_list = paginator.get_page(page)
+        context = {'products': products_list, 'albums': albums, 'genres': genres, 'filter': True}
+        return render(request, 'ebbeats/explore.html', context)
+    else:
+        paginator = Paginator(products, 9)
+        page = request.GET.get('page')
+        print("\nI'm under the normal get")
+        print("Page gotten: ", page)
+        products_list = paginator.get_page(page)
+        context = {'products': products_list, 'albums': albums, 'genres': genres}
+        return render(request, 'ebbeats/explore.html', context)
 
 
 def album_detail(request, id):

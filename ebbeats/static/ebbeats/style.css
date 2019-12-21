@@ -16,6 +16,10 @@ body{
     background: #212122 !important;
 }
 
+.bg-info{
+    background: #3b4ad4 !important;
+}
+
 .text-app{
     color: #ecebeb;
 }
@@ -209,6 +213,10 @@ footer{
     /* background: linear-gradient(rgba(0,0,0,.5), rgba(0, 0, 0, 0.281)), url('./images/colorful_vintage_stripes-wallpaper-2560x1600.jpg') center center/cover; */
 }
 
+#message-input{
+    margin-top: 143px;
+}
+
 .owl-carousel{
     position: absolute;
     width: 96.5%;
@@ -251,6 +259,11 @@ footer{
     .message-box{
         width: 40%;
     }
+
+    #message-input{
+        margin-top: 50px;
+    }
+
     .navbar-toggler{
         display: block;
     }

@@ -167,7 +167,7 @@
 
 
 {% block content %}
-    <section class='p-0 explore-section bg-dark py-2' style='margin-bottom: 100px'>
+    <section class='p-0 explore-section bg-dark py-2' style='margin-bottom: 45px'>
         {% block display_search_filters %}
         <header class='px-3 d-flex flex-lg-row flex-md-row flex-sm-column flex-column justify-content-md-between align-items-md-center mt-3 mb-4'>
             <p id='explore-welcome-msg' class='m-0 text-uppercase text-white m-md-0 mb-sm-4 mb-4'></p>
@@ -241,7 +241,7 @@
                                     <p>Genre: {% for genre in product.genre.filter %}{% if forloop.counter != product.genre.count %}{{ genre }}, {% else %} {{ genre }} {% endif %} {% endfor %}</p>
                                     <p>Rating: ******</p>
                                     <div class="d-flex justify-content-between align-items-center py-2 px-1">
-                                        <a href="#" class='preview-play-btn' title='preview'><i class='fas fa-play-circle fa-2x'></i><audio class='product-sample' src="{{ product.sample.url }}"></audio> </a>
+                                        <a href="#" class='preview-play-btn' title='preview'><i class='fas fa-play-circle fa-2x'></i><audio class='product-sample' src=""></audio> </a>
                                         <small class="text-muted">{{ product.duration }}</small>
                                     </div>
                                 </div>
@@ -252,6 +252,27 @@
             </div>
         {% endfor %}
         </div>
+        {% if query %}
+        <div class="pagination my-3 px-3 d-flex justify-content-center align-items-center">
+            <span class="">
+                {% if products.has_previous %}
+                    <a href="{{request.path}}?search=1" class='btn btn-outline-danger'><i class="fas fa-angle-double-left"></i></a>
+                    <a href="{{request.path}}?search={{ products.previous_page_number }}" class='btn btn-outline-danger'><i class="fas fa-angle-left"></i></a>
+                {% else %}
+                    <a href="#" class='btn btn-secondary disabled'><i class="fas fa-angle-left"></i></a>
+                {% endif %}
+                <span class="current">
+                    <a href="?search={{products.number}}" class='btn btn-danger'>{{ products.number }}</a>
+                </span>
+                {% if products.has_next %}
+                    <a href="{{request.path}}?search={{ products.next_page_number }}" class='btn btn-outline-danger'><i class="fas fa-angle-right"></i></a>
+                    <a href="{{request.path}}?search={{ products.paginator.num_pages }}" class='btn btn-outline-danger'><i class="fas fa-angle-double-right"></i></a>
+                {% else %}
+                    <a href="#" class='btn btn-secondary disabled'><i class="fas fa-angle-right"></i></a>
+                {% endif %}
+            </span>
+        </div>
+        {% else %}
         <div class="pagination my-3 px-3 d-flex justify-content-center align-items-center">
             <span class="">
                 {% if products.has_previous %}
@@ -271,6 +292,7 @@
                 {% endif %}
             </span>
         </div>
+        {% endif %}
         {% endblock %}
     </section>
 
