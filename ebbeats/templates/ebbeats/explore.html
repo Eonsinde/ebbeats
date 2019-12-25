@@ -252,27 +252,6 @@
             </div>
         {% endfor %}
         </div>
-        {% if query %}
-        <div class="pagination my-3 px-3 d-flex justify-content-center align-items-center">
-            <span class="">
-                {% if products.has_previous %}
-                    <a href="{{request.path}}?search=1" class='btn btn-outline-danger'><i class="fas fa-angle-double-left"></i></a>
-                    <a href="{{request.path}}?search={{ products.previous_page_number }}" class='btn btn-outline-danger'><i class="fas fa-angle-left"></i></a>
-                {% else %}
-                    <a href="#" class='btn btn-secondary disabled'><i class="fas fa-angle-left"></i></a>
-                {% endif %}
-                <span class="current">
-                    <a href="?search={{products.number}}" class='btn btn-danger'>{{ products.number }}</a>
-                </span>
-                {% if products.has_next %}
-                    <a href="{{request.path}}?search={{ products.next_page_number }}" class='btn btn-outline-danger'><i class="fas fa-angle-right"></i></a>
-                    <a href="{{request.path}}?search={{ products.paginator.num_pages }}" class='btn btn-outline-danger'><i class="fas fa-angle-double-right"></i></a>
-                {% else %}
-                    <a href="#" class='btn btn-secondary disabled'><i class="fas fa-angle-right"></i></a>
-                {% endif %}
-            </span>
-        </div>
-        {% else %}
         <div class="pagination my-3 px-3 d-flex justify-content-center align-items-center">
             <span class="">
                 {% if products.has_previous %}
@@ -292,7 +271,6 @@
                 {% endif %}
             </span>
         </div>
-        {% endif %}
         {% endblock %}
     </section>
 

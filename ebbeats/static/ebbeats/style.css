@@ -214,12 +214,13 @@ footer{
 }
 
 #message-input{
-    margin-top: 143px;
+    margin-top: 140px;
 }
 
 .owl-carousel{
     position: absolute;
-    width: 96.5%;
+    width: 67pc;
+    margin: auto;
     bottom: 75px;
     box-sizing: border-box;
     margin: 0;

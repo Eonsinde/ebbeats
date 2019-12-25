@@ -8,6 +8,7 @@ app_name='ebbeats'
 urlpatterns = [
     path('', views.index, name='home'),
     path('explore/', views.explore, name='explore'),
+    # path('explore-test/<str:param>/', views.explore_test, name='ex-test'),
     path('album-detail/<int:id>/', views.album_detail, name='album-detail'),
     path('contribute/', views.contribute, name='contribute'),
     path('contact/', views.contact, name='contact'),
