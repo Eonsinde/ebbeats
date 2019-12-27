@@ -181,7 +181,7 @@
                         </div>
                         <div class="filter-fieldset">
                             <label for="">Album:</label>
-                            <select name="album" id="" value=''>
+                            <select name="album">
                                 <option value="">All</option>
                                 {% for album in albums %}
                                     <option value="{{ album.pk }}">{{ album.name }}</option>
@@ -190,7 +190,7 @@
                         </div>
                         <div class="filter-fieldset">
                             <label for="">Genre:</label>
-                            <select name="genre" id="" value=''>
+                            <select name="genre">
                                 <option value="">All</option>
                                 {% for genre in genres %}
                                     <option value="{{ genre.pk }}">{{ genre.name }}</option>
@@ -199,7 +199,7 @@
                         </div>
                         <div class="filter-fieldset">
                             <label for="" class=''>Category:</label>
-                            <select name="category" id="" class='ml-1'>
+                            <select name="category" class='ml-1'>
                                 <option value="">All</option>
                                 <option value="b">Beats</option>
                                 <option value="dk">Drum Kits</option>
@@ -232,7 +232,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a href="#" class='btn btn-outline-light' title='Buy Now'><i class='fas fa-download'></i></a>
-                                <a href="#" class='btn btn-outline-light cart-btn' title='add to cart'><i class='fas fa-shopping-cart'></i> +</a>
+                                <a href="#" class='btn btn-outline-light cart-btn' title='Add To Cart'><i class='fas fa-shopping-cart'></i> +</a>
                             </div>
                             <div class='preview-dropdown text-right'>
                                 <a href="#" class='product-details text-light'>Preview</a>
@@ -252,20 +252,21 @@
             </div>
         {% endfor %}
         </div>
+        {% load pag_template_tag %}
         <div class="pagination my-3 px-3 d-flex justify-content-center align-items-center">
             <span class="">
                 {% if products.has_previous %}
-                    <a href="{{request.path}}?page=1" class='btn btn-outline-danger'><i class="fas fa-angle-double-left"></i></a>
-                    <a href="{{request.path}}?page={{ products.previous_page_number }}" class='btn btn-outline-danger'><i class="fas fa-angle-left"></i></a>
+                    <a href="{{request.path}}?{% param_replace page=1 %}" class='btn btn-outline-danger'><i class="fas fa-angle-double-left"></i></a>
+                    <a href="{{request.path}}?{% param_replace page=products.previous_page_number %}" class='btn btn-outline-danger'><i class="fas fa-angle-left"></i></a>
                 {% else %}
                     <a href="#" class='btn btn-secondary disabled'><i class="fas fa-angle-left"></i></a>
                 {% endif %}
                 <span class="current">
-                    <a href="?page={{products.number}}" class='btn btn-danger'>{{ products.number }}</a>
+                    <a href="?{% param_replace page=products.number %}" class='btn btn-danger'>{{ products.number }}</a>
                 </span>
                 {% if products.has_next %}
-                    <a href="{{request.path}}?page={{ products.next_page_number }}" class='btn btn-outline-danger'><i class="fas fa-angle-right"></i></a>
-                    <a href="{{request.path}}?page={{ products.paginator.num_pages }}" class='btn btn-outline-danger'><i class="fas fa-angle-double-right"></i></a>
+                    <a href="{{request.path}}?{% param_replace page=products.next_page_number %}" class='btn btn-outline-danger'><i class="fas fa-angle-right"></i></a>
+                    <a href="{{request.path}}?{% param_replace page=products.paginator.num_pages %}" class='btn btn-outline-danger'><i class="fas fa-angle-double-right"></i></a>
                 {% else %}
                     <a href="#" class='btn btn-secondary disabled'><i class="fas fa-angle-right"></i></a>
                 {% endif %}

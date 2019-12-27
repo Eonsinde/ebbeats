@@ -16,6 +16,7 @@ urlpatterns = [
     path('add-to-cart/<int:pk>/', views.add_to_cart, name='add-to-cart'),
     path('remove-from-cart/<int:pk>/', views.remove_from_cart, name='remove-from-cart'),
     path('checkout/', views.checkout, name='checkout'),
+    path('payment-success', views.payment_success, name='payment_success')
     path('dashboard/', views.dashboard, name='dashboard'),
     path('update-profile/', views.update_profile, name='update-profile'),
     path('forms/', views.forms, name='forms'),
@@ -23,6 +24,4 @@ urlpatterns = [
     path('signup/', views.signup, name='signup-view'),
     path('logout/', views.logout_view, name='logout-view'),
     path('error/', views.error, name='error'),
-    path('test-payment/', views.create_and_post,name='test-pay'),
-    path('make-payments/<int:payment_id>', views.payment_details, name='payment-details')
 ]

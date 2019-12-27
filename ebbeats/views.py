@@ -26,83 +26,31 @@ def index(request):
 
 
 def explore(request):
+    products = Product.objects.all()
     albums = Album.objects.all()
     genres = Genre.objects.all()
     if request.method == 'GET' and request.GET.get('query'):
-        products = request.session.get('products_list')
-        if request.session.get('query') is not None or '':
-            query_results = products.filter(name__icontains=request.seesion.get(request.session.get("query")))
-        else:
-            query = request.GET.get('query')
-            query_results = products.filter(name__icontains=f'{query}')
-            request.session.get('query', query)
-        paginator = Paginator(query_results, 1)
-        page = request.GET.get('search')
-        print("\nI'm under the query get")
-        print("Page gotten: ", page)
+        query = request.GET.get('query')
+        query_results = products.filter(name__icontains=f'{query}')
+        paginator = Paginator(query_results, 6)
+        page = request.GET.get('page')
         products_list = paginator.get_page(page)
         context = {'products': products_list, 'albums': albums, 'genres': genres}
         return render(request, 'ebbeats/explore.html', context)
     elif request.method == 'GET' and (request.GET.get('album') or request.GET.get('category') or request.GET.get('genre') or request.GET.get('price')):
         products = request.session.get('products_list')
         f = ProductFilter(request.GET, queryset=products)
-        paginator = Paginator(f.qs, 1)
-        print("\nI'm under the filter get")
+        paginator = Paginator(f.qs, 6)
         page = request.GET.get('page')
-        print("Page gotten: ", page)
         products_list = paginator.get_page(page)
         context = {'products': products_list, 'albums': albums, 'genres': genres, 'filter': True}
         return render(request, 'ebbeats/explore.html', context)
     else:
-        products = request.session.get('products_list', Product.objects.all())
-        paginator = Paginator(products, 9)
+        paginator = Paginator(products, 12)
         page = request.GET.get('page')
-        print("\nI'm under the normal get")
-        print("Page gotten: ", page)
         products_list = paginator.get_page(page)
         context = {'products': products_list, 'albums': albums, 'genres': genres}
         return render(request, 'ebbeats/explore.html', context)
-
-#
-# def explore_test(request, param):
-#     if request.method == 'GET':
-#         print("Explore test")
-#         if param == 'filter':
-#             f = ProductFilter(request.GET, queryset=Product.objects.all())
-#             paginator = Paginator(f.qs, 1)
-#             print(f.qs)
-#             print("\nI'm under the filter get")
-#             page = request.GET.get('page')
-#             print("Page gotten: ", page)
-#             products_list = paginator.get_page(page)
-#             context = {'products': products_list, 'albums': Album.objects.all(), 'genres': Genre.objects.all()}
-#             # return render(request, 'ebbeats/explore.html', context)
-#         elif param == 'search':
-#             query = request.GET.get('query')
-#             products = Product.objects.filter(name__icontains=f'{query}')
-#             print(products)
-#             # print('Search: ', products)
-#             paginator = Paginator(products, 1)
-#             page = request.GET.get('page')
-#             print("\nI'm under the query get")
-#             print("Page gotten: ", page)
-#             products_list = paginator.get_page(page)
-#             context = {'products': products_list, 'albums': Album.objects.all(), 'genres': Genre.objects.all()}
-#             # return render(request, 'ebbeats/explore.html', context)
-#         else:
-#             products = Product.objects.all()
-#             albums = Album.objects.all()
-#             genres = Genre.objects.all()
-#             paginator = Paginator(products, 9)
-#             page = request.GET.get('page')
-#             print("\nI'm under the normal get")
-#             print("Page gotten: ", page)
-#             products_list = paginator.get_page(page)
-#             context = {'products': products_list, 'albums': albums, 'genres': genres}
-#             # return render(request, 'ebbeats/explore.html', context)
-#
-#         print("Product list:", context['products'])
-#         return render(request, 'ebbeats/explore.html', context)
 
 
 def album_detail(request, id):
@@ -115,19 +63,6 @@ def album_detail(request, id):
 
 def contribute(request):
     return render(request, 'ebbeats/forms/contribute.html')
-
-#
-# def search(request):
-#     query = request.GET['query']
-#     products = Product.objects.filter(name__icontains=f'{query}')
-#     # page_obj = Paginator(products, 1)
-#     return render(request, 'ebbeats/search.html', context={'products': products})
-#
-#
-# def filter_(request):
-#     if request.method == 'GET':
-#         f = ProductFilter(request.GET, queryset=Product.objects.all())
-#         return render(request, 'ebbeats/filter.html', {'filter': f})
 
 
 def contact(request):
@@ -216,6 +151,7 @@ def add_to_cart(request, pk):
             order = Order.objects.create(user=request.user, ordered_date=timezone.now())
             order_item = OrderItem.objects.create(item=product, user=request.user)
             order.items.add(order_item)
+            order.save()
             return JsonResponse({'message': 'success'})
 
 
@@ -234,6 +170,7 @@ def remove_from_cart(request, pk):
             if order.items.filter(item__pk=product.id).exists():
                 ord_item_to_remove = order.items.get(item__pk=product.id, user=request.user)
                 order.items.remove(ord_item_to_remove)
+                order.save()
                 return JsonResponse({'message': 'removed'})
             else:  # if not; do nothing
                 return JsonResponse({'message': 'not_present'})
@@ -243,11 +180,16 @@ def remove_from_cart(request, pk):
 
 @login_required
 def checkout(request):
-    order = Order.objects.get(user=request.user)
+    print(request.user)
+    order = Order.objects.get(user=request.user, ordered=False)
     context = {
         'cart': order.items.all()
     }
     return render(request, 'ebbeats/checkout.html', context)
+
+
+def payment_success(request):
+    return HttpResponse("Payment successful")
 
 
 def forms(request):
@@ -300,39 +242,6 @@ def logout_view(request):
 def error(request):
     return render(request, 'ebbeats/error_page.html')
 
-
-# for the payment system
-def create_and_post(request):
-    Payment = get_payment_model()
-    payment = Payment.objects.create(
-        variant='default',
-        description='Book purchase',
-        total=Decimal(120),
-        tax=Decimal(20),
-        currency='USD',
-        delivery=Decimal(10),
-        billing_first_name='Sherlock',
-        billing_last_name='Holmes',
-        billing_address_1='221B Baker Street',
-        billing_address_2='',
-        billing_city='London',
-        billing_postcode='NW1 6XE',
-        billing_country_code='UK',
-        billing_country_area='Greater London',
-        customer_ip_address='127.0.0.1'
-    )
-    payment.save()
-    return redirect('ebbeats:payment-details', payment.id)
-
-
-def payment_details(request, payment_id):
-    payment = get_object_or_404(get_payment_model(), id=payment_id)
-    try:
-        payment_form = payment.get_form(data=request.POST or None)
-    except RedirectNeeded as redirect_to:
-        return redirect(str(redirect_to))
-    print(payment.token)
-    return render(request, 'ebbeats/forms/payment.html', {'payment_form': payment_form, 'payment': payment})
 
 
 

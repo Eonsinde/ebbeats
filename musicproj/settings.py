@@ -159,9 +159,3 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # email backend
 
-
-# for payment
-PAYMENT_HOST = 'localhost:8000'
-PAYMENT_USES_SSL = False
-PAYMENT_MODEL = 'ebbeats.Payment'
-PAYMENT_VARIANTS = { 'default': ('payments.dummy.DummyProvider', {})}

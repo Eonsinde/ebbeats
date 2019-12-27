@@ -2,14 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b266219-d15a-4632-9c06-2943d6ca5dc7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ebbeats/templatetags/pag_template_tag.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ebbeats/filters.py" beforeDir="false" afterPath="$PROJECT_DIR$/ebbeats/filters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ebbeats/static/ebbeats/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/ebbeats/static/ebbeats/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ebbeats/templates/ebbeats/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/ebbeats/templates/ebbeats/checkout.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ebbeats/templates/ebbeats/explore.html" beforeDir="false" afterPath="$PROJECT_DIR$/ebbeats/templates/ebbeats/explore.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ebbeats/templates/ebbeats/forms/forms.html" beforeDir="false" afterPath="$PROJECT_DIR$/ebbeats/templates/ebbeats/forms/forms.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ebbeats/templates/ebbeats/filter.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ebbeats/templates/ebbeats/search.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ebbeats/templatetags/cart_template_tag.py" beforeDir="false" afterPath="$PROJECT_DIR$/ebbeats/templatetags/cart_template_tag.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ebbeats/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/ebbeats/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ebbeats/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/ebbeats/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicproj/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/musicproj/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicproj/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/musicproj/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,8 +28,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/musicproj/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2295">
-              <caret line="135" selection-start-line="135" selection-end-line="135" />
+            <state relative-caret-position="329">
+              <caret line="161" selection-start-line="161" selection-end-line="161" />
             </state>
           </provider>
         </entry>
@@ -35,7 +38,7 @@
         <entry file="file://$PROJECT_DIR$/musicproj/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="357">
-              <caret line="24" column="47" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
+              <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
               <folding>
                 <element signature="e#633#665#0" expanded="true" />
               </folding>
@@ -70,8 +73,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ebbeats/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="11" column="76" lean-forward="true" selection-start-line="11" selection-start-column="76" selection-end-line="11" selection-end-column="76" />
+            <state relative-caret-position="238">
+              <caret line="18" column="72" selection-start-line="18" selection-start-column="72" selection-end-line="18" selection-end-column="72" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -82,22 +85,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ebbeats/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="34" column="13" lean-forward="true" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+            <state relative-caret-position="193">
+              <caret line="190" column="29" lean-forward="true" selection-start-line="190" selection-start-column="29" selection-end-line="190" selection-end-column="29" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ebbeats/filters.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="7" column="78" selection-start-line="7" selection-start-column="78" selection-end-line="7" selection-end-column="78" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -108,14 +99,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>id</find>
+      <find>session</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -132,7 +124,6 @@
         <option value="$PROJECT_DIR$/ebbeats/templates/ebbeats/error_page.html" />
         <option value="$PROJECT_DIR$/ebbeats/templates/ebbeats/forms/contact.html" />
         <option value="$PROJECT_DIR$/ebbeats/templates/ebbeats/filter.html" />
-        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch1.py" />
         <option value="$PROJECT_DIR$/ebbeats/templates/ebbeats/cart.html" />
         <option value="$PROJECT_DIR$/../ecommerce/ecommerce/settings.py" />
         <option value="$PROJECT_DIR$/ebbeats/template_tags/__init__.py" />
@@ -142,13 +133,16 @@
         <option value="$PROJECT_DIR$/ebbeats/test_payment.py" />
         <option value="$PROJECT_DIR$/ebbeats/admin.py" />
         <option value="$PROJECT_DIR$/ebbeats/templates/ebbeats/forms/payment.html" />
-        <option value="$PROJECT_DIR$/musicproj/urls.py" />
         <option value="$PROJECT_DIR$/ebbeats/templates/ebbeats/forms/update_profile.html" />
-        <option value="$PROJECT_DIR$/musicproj/settings.py" />
-        <option value="$PROJECT_DIR$/ebbeats/templatetags/cart_template_tag.py" />
         <option value="$PROJECT_DIR$/ebbeats/models.py" />
         <option value="$PROJECT_DIR$/ebbeats/filters.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch1.py" />
+        <option value="$PROJECT_DIR$/ebbeats/templatetags/cart_template_tag.py" />
+        <option value="$PROJECT_DIR$/ebbeats/templatetags/pagination_template_tag.py" />
+        <option value="$PROJECT_DIR$/ebbeats/templatetags/pag_template_tag.py" />
+        <option value="$PROJECT_DIR$/musicproj/settings.py" />
         <option value="$PROJECT_DIR$/ebbeats/urls.py" />
+        <option value="$PROJECT_DIR$/musicproj/urls.py" />
         <option value="$PROJECT_DIR$/ebbeats/views.py" />
       </list>
     </option>
@@ -181,6 +175,12 @@
             <path>
               <item name="musicproj" type="b2602c69:ProjectViewProjectNode" />
               <item name="musicproj" type="462c0819:PsiDirectoryNode" />
+              <item name="ebbeats" type="462c0819:PsiDirectoryNode" />
+              <item name="templatetags" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="musicproj" type="b2602c69:ProjectViewProjectNode" />
+              <item name="musicproj" type="462c0819:PsiDirectoryNode" />
               <item name="media" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -188,6 +188,15 @@
               <item name="musicproj" type="462c0819:PsiDirectoryNode" />
               <item name="media" type="462c0819:PsiDirectoryNode" />
               <item name="profile_images" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="musicproj" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+            </path>
+            <path>
+              <item name="musicproj" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
+              <item name="Scratches" type="d62648e6:ScratchProjectViewPane$MyRootNode" />
             </path>
           </expand>
           <select />
@@ -382,16 +391,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../serviceunit/serviceunit/settings.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -458,43 +457,6 @@
     <entry file="file://$PROJECT_DIR$/media/test/IMG_20170813_135902.jpg" />
     <entry file="file://$PROJECT_DIR$/media/profile_images/32948670_781924168672544_8723517214596005888_o_SRcPKf9.jpg" />
     <entry file="file://$PROJECT_DIR$/media/profile_images/IMG_20170813_135902.jpg" />
-    <entry file="file://$PROJECT_DIR$/ebbeats/templatetags/cart_template_tag.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/musicproj/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2295">
-          <caret line="135" selection-start-line="135" selection-end-line="135" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/musicproj/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="24" column="47" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
-          <folding>
-            <element signature="e#633#665#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ebbeats/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ebbeats/filters.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -515,10 +477,64 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="10" lean-forward="true" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ebbeats/templatetags/cart_template_tag.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="5" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ebbeats/templatetags/pag_template_tag.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ebbeats/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/musicproj/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="161" selection-start-line="161" selection-end-line="161" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/musicproj/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="24" column="4" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
+          <folding>
+            <element signature="e#633#665#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ebbeats/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="11" column="76" lean-forward="true" selection-start-line="11" selection-start-column="76" selection-end-line="11" selection-end-column="76" />
+        <state relative-caret-position="238">
+          <caret line="18" column="72" selection-start-line="18" selection-start-column="72" selection-end-line="18" selection-end-column="72" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
@@ -527,8 +543,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ebbeats/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="34" column="13" lean-forward="true" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+        <state relative-caret-position="193">
+          <caret line="190" column="29" lean-forward="true" selection-start-line="190" selection-start-column="29" selection-end-line="190" selection-end-column="29" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
           </folding>
