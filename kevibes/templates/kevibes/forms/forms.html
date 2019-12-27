@@ -1,0 +1,246 @@
+{% extends 'kevibes/index.html' %}
+
+{% block title %}Kevibes - login/signup{% endblock %}
+    {% block extrastyles %}
+    {% load static %}
+    <style>
+        .form-section-container{
+            height: 100%;
+            position: fixed;
+            width: 100%;
+            background: linear-gradient(rgba(0,0,0,.5), rgba(0,0, 0, 0.5)), url('{% static "kevibes/images/colorful_vintage_stripes-wallpaper-2560x1600.jpg" %}') center center;
+        }
+
+        .form-section{
+            background: linear-gradient(rgba(0,0,0,.5), rgba(0,0, 0, 0.5)) , rgba(32, 32, 34, 0.918);
+            width: 50%;
+            margin: auto;
+            padding: 30px 0px;
+            position: relative;
+            left: 0;
+            right: 0;
+            overflow: hidden;
+            height: 100%;
+            box-shadow: 0 0 20px #000000bc;
+        }
+
+        label{
+            display: block;
+            color: #ecebeb;
+            opacity: .8;
+        }
+
+        input{
+            width: 100%;
+            background: transparent;
+            border: .5px #ecebeb solid;
+            border-radius: 3px;
+            color: #ecebeb;
+            padding: 5px;
+            letter-spacing: 2px;
+            opacity: .8;
+            outline: none;
+        }
+
+        input:focus-within{
+           border-color: rgb(221, 51, 73);
+           box-shadow: none;
+        }
+
+        .form-btn{
+            background: transparent;
+            color: #dc3545;
+            padding: 7px 11px;
+            border: 1px #dc3545 solid;
+            border-radius: 3px;
+            transition: .5s ease;
+        }
+
+        .form-btn:hover{
+            color: #eeeeee; 
+            background: #dc3545;
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #000000bc;
+        }
+
+        .form-btn:focus-within{
+            outline: none;
+        }
+
+        .login-form{
+            width: 450px;
+            margin: 130px auto;
+            padding: 15px 20px;
+            border-radius: 3px;
+            transform: translate(-600px, 0px);
+            position: absolute;
+            top: 50px;
+            left: 0;
+            right: 0;
+            transition: .5s ease;
+        }
+
+        .login-form.display{
+            transform: translate(0px, 0px);
+        }
+
+        .social-acc-icon{
+            color: #ecebeb;
+            font-size: 1.6rem;
+            opacity: .5;
+            transition: .6s ease;
+        }
+
+        .social-acc-icon:hover{
+            opacity: 1;
+        }
+
+        .signup-form{
+            position: absolute;
+            width: 450px;
+            margin: auto;
+            padding: 30px 20px;
+            border-radius: 3px;
+            top: 80px;
+            right: 0;
+            transform: translate(450px, 0px);
+            transition: .5s ease;
+        }
+
+        form.signup-form.display{
+            left: 0;
+            transform: translate(0px, 0px);
+        }
+
+        @media screen and (max-width: 930px){
+            .form-section{
+                width: 60%;
+            }
+        }
+
+        @media screen and (max-width: 768px){
+            .form-section{
+                width: 80%;
+            }
+        }
+
+    </style>
+    {% endblock %}
+
+    {% block all_content %}
+    <div class='form-section-container'>
+        <section class='form-section'>
+            <h3 class='text-center text-lowercase my-4'><a class='text-app' href="{% url 'kevibes:home' %}">kevibes</a></h3>
+            
+            <form action='{% url "kevibes:login-view" %}' method='POST' class='login-form display'>
+                {% csrf_token %}
+                {% if message %}
+                    <div class='auth-msg bg-danger p-2 mb-3 text-app text-center'>
+                        {{ message }}
+                    </div>
+                    <script>
+                        setTimeout(()=> { document.querySelector('.auth-msg').remove() }, 5000);
+                    </script>
+                {% endif %}
+                <div class="form-group mb-4">
+                    <label for="username">Username</label>
+                    <input type="text" name='username' id='username'>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="passcode">Password</label>
+                    <input type="password" name='password' id='passcode'>
+                </div>
+                <div class="form-group d-flex justify-content-between align-items-center">
+                    <button class='form-btn login-btn' style='letter-spacing: 2px;'>Login</button>
+                    <a href="#" class='signup-form-btn text-white-50' onclick='displaySignupForm()'>Not Registered?</a>
+                </div>
+                <div class='social-acc-section d-flex justify-content-center py-2 mt-4'>
+                    <a href="#"><i class="fab fa-google social-acc-icon mr-3"></i></a>
+                    <a href=""><i class="fab fa-facebook social-acc-icon mr-3"></i></a>
+                    <a href=""><i class="fab fa-twitter social-acc-icon mr-3"></i></a>
+                </div>
+            </form>
+
+            <form action='{% url "kevibes:signup-view" %}' method='POST' class='signup-form mt-4'>
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="">Username</label>
+                    <input type="text" name='username'>
+                </div>
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="email" name='email'>
+                </div>
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input type="password" name='password'>
+                </div>
+                <div class="form-group">
+                    <label for="">Confirm Password</label>
+                    <input type="password" id='confirm-pswd'>
+                </div>
+                <div class='d-flex justify-content-between align-items-center'>
+                    <button class='form-btn signup-btn'>Submit</button>
+                    <a href="#" class='login-form-btn text-white-50' onclick='displayLoginForm()'>Already Registered?</a>
+                </div>
+            </form>
+        </section>
+    </div><!-- end of the background container for the form section -->
+    {% endblock %}
+
+
+{% block extrascripts %}
+    <script>
+        displaySignupForm = () => {
+            document.querySelector('.signup-form').classList.add('display');
+            document.querySelector('.login-form').classList.remove('display');
+        }
+
+        displayLoginForm = () => {
+            document.querySelector('.login-form').classList.add('display');
+            document.querySelector('.signup-form').classList.remove('display');
+        }
+
+
+        let loginForm = $('.login-form');
+        let signupForm = $('.signup-form');
+        
+        let loginTrials = 0;
+        loginForm.on('submit', function(e){
+            loginTrials++;
+            if (loginForm.find('input[type="text"]').val() === '' || loginForm.find('input[type="password"]').val() == ''){
+                if (loginTrials >= 2){
+                    e.preventDefault();
+                    showAlert('Please fill in all fields', 'danger', 5000, 'shake');
+                }else{
+                    e.preventDefault();
+                    showAlert('Please fill in all fields', 'danger', 5000, 'fadeIn');
+                }
+            }
+        });
+
+        let signupTrials = 0;
+        signupForm.on('submit', function(e){
+            signupTrials++;
+            if (signupForm.find('input[name="username"]').val() === '' || signupForm.find('input[name="email"]').val() === '' || signupForm.find('input[name="password"]').val() === '' || signupForm.find('input[id="confirm-pswd"]').val() === ''){
+                if (signupTrials >= 2){
+                    e.preventDefault();
+                    showAlert('Please fill in all fields', 'danger', 5200, 'shake');
+                }else{
+                    e.preventDefault();
+                    showAlert('Please fill in all fields', 'danger', 5000, 'fadeIn');
+                }
+            }else if (signupForm.find('input[name="password"]').val() !== signupForm.find('input[id="confirm-pswd"]').val()){
+                if (signupTrials >= 2){
+                    e.preventDefault();
+                    showAlert('Passwords dont\'t match', 'danger', 5200, 'shake');
+                }else{
+                    e.preventDefault();
+                    showAlert('Passwords dont\'t match', 'danger', 5000, 'fadeIn');
+                }
+            }
+        });
+
+    </script>
+{% endblock %}
+

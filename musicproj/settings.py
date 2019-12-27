@@ -32,9 +32,8 @@ ALLOWED_HOSTS = []
 
 
 INSTALLED_APPS = [
+    'kevibes',
     'crispy_forms',
-    'payments',
-    'ebbeats',
     'django_filters',
     'django.contrib.admin',
     'django.contrib.contenttypes',
@@ -88,7 +87,7 @@ WSGI_APPLICATION = 'musicproj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ebbeats',
+        'NAME': 'kevibes_db',
         'USER': 'postgres',
         'PASSWORD': 'Helicopter123',
         "HOST": "127.0.0.1",
@@ -149,7 +148,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
-LOGIN_URL = '/ebbeats/forms/'
+LOGIN_URL = '/kevibes/forms/'
 
 SITE_ID = 1
 

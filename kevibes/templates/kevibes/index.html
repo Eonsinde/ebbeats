@@ -1,0 +1,188 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{%block title%}Kevibes - Home{%endblock%}</title>
+    <link rel="stylesheet" href="{% static 'kevibes/bootstrap-4.3.1-dist/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'kevibes/fontawesome-5/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'kevibes/WOW/css/libs/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'kevibes/owl-carousel/dist/assets/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'kevibes/owl-carousel/dist/assets/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'kevibes/style.css' %}">
+    {% block extrastyles %}{% endblock %}
+    <script src='{% static "kevibes/jquery34min.js" %}'></script>
+</head>
+
+<body>
+    {% block all_content %}
+    {% load cart_template_tag %}
+    <header class='bg-danger d-flex justify-content-between py-2 px-3'>
+        <div class='h-left d-flex justify-content-between align-items-center'>
+            <a href="#" class='navbar-toggler' onclick="navbarOpen()"><i class='fas fa-bars'></i></a>
+            <a href="#" class='headerBrand text-uppercase'>KEVIBES</a>
+        </div>
+        <div class='h-right d-flex justify-content-between align-items-center'>
+            <div class="drop-down">
+                <a href="#" class='important-btn mr-2'><img src="" alt=""><i class='fas fa-cog'></i></a>
+                <div class="drop-down-content bg-dark text-left">
+                    {% if user.is_authenticated %}
+                        <p class='text-app m-0'>Hi, {{ user.username }}</p>
+                        <hr class='my-2' style='background: #666666'>
+                        <a href="{% url 'kevibes:dashboard' %}" class='text-app d-block mb-2'><i class=" mr-1 fas fa-burn"></i> Dashboard</a>
+                        <a href="{% url 'kevibes:update-profile' %}" class='text-app d-block mb-1'><i class="fas fa-user-edit mr-1 "></i> Edit Profile</a>
+                    {% else %}
+                        <p class='pb-2 text-app' style="border-bottom: 1px #4b4b4b solid;">Hi, User</p>
+                        <a href="#" class='text-app'>Log in to access other features</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="cart-btn-container mr-3" style='position: relative;'>
+                <a href="{% url 'kevibes:cart' %}" class='cart-link'><i class='fas fa-shopping-bag'></i></a>
+                <!-- <span class='text-center text-app' style='font-size: .8rem; position: absolute; border-radius: 100%; left:23px; right: 0; bottom: 8px; padding: 2px 2px;'>{{ request.user|cart_item_count }}</span> -->
+            </div>
+            {% if not user.is_authenticated %}
+                <a href="{% url 'kevibes:forms' %}" class='mr-3 text-uppercase' style='font-size: small;'>Log In/Sign Up</a>
+            {% else %}
+                <a href="{% url 'kevibes:logout-view' %}" class='mr-3 text-uppercase' style='font-size: small;'>Logout</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <section>
+        <nav id='side-nav' class='side-nav bg-dark shadow-sm'>
+            <a href="#" class='btn-close' onclick="navbarClose()">&times;</a>
+            <section class="my-navbar">
+                {% block navlinks %}
+                    <a href="{% url 'kevibes:home' %}" class='navlink text-left text-uppercase active'><i class='fas fa-home mr-3'></i>Home</a>
+                    <a href="{% url 'kevibes:explore' %}" class='navlink text-left text-uppercase'><i class='fas fa-globe mr-3'></i>Explore</a>
+                    <a href="{% url 'kevibes:contact' %}" class='navlink text-left text-uppercase'><i class='fas fa-phone-alt mr-3'></i>Contact</a>
+                    <a href="{% url 'kevibes:contribute' %}" class='navlink text-left text-uppercase'><i class='fas fa-gem mr-3'></i>Contribute</a>
+                    <a href="#" class='navlink text-left text-uppercase'><i class='fas fa-question-circle mr-3'></i>FAQs</a>
+                {% endblock %}
+            </section>
+            <footer>
+                <section class="social-icons-section d-flex justify-content-center align-items-center mb-2">
+                    <a href="#"><i class="fab fa-facebook-square social-icon mr-3"></i></a>
+                    <a href="#"><i class="fab fa-instagram social-icon mr-3"></i></a>
+                    <a href="#"><i class='fab fa-twitter-square social-icon mr-3'></i></a>
+                </section>
+                <section class='copyright-section text-center text-uppercase'>
+                    <p class='m-0'>Copyright &copy; 2019; Kevibes</p>
+                    <small class='m-0'>Developed by <a target=_blank href="https://www.instagram.com/eon_sinde/" class='text-white' style='text-decoration: none;'>eonzart</a></small>
+                </section>
+            </footer>
+        </nav>
+        <main class='main-content'>
+            {% block content %}
+            <section class="p-2 home-content" style='height: 90vh;'>
+                <h1 id='message-input' class='text-uppercase text-center text-app'></h1>
+                <h3 class='text-app text-center py-3' style='position: absolute; bottom: 310px; z-index: 2; width: 96.5%;'>Latest Releases</h3>
+                <div class="owl-carousel owl-theme">
+                     {% for product in products %}
+                        {% if forloop.counter <= 6  %}
+                            <div class="">
+                                <div class="product-placement bg-dark" style='position:relative;'>
+                                    <img src="{% static 'kevibes/images/colorful_vintage_stripes-wallpaper-2560x160.jpg' %}" style='opacity: .7;' height="100%" width="100%" alt="{{ product }} album cover image">
+                                    <div class="product-detail-dropdown slide-right d-flex align-items-center justify-content-center" style="background: linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)), url('{{ product.album.album_cover.url }}') center center; background-size: cover;">
+                                        <div class='text-app'>
+                                            <div>Album: {{ product.album }}</div>
+                                            <div>Ratings: ******</div>
+                                            More Details: <a class='text-danger' href="{% url 'kevibes:album-detail' product.album.pk %}">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='p-2 bg-dark text-app text-center'>{{ product }}</div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}<!-- end of for loop -->
+                </div>
+            </section>
+            {% endblock %}
+        </main>
+    </section>
+    {% endblock %}<!-- end of the all_content block -->
+
+
+    <script src="{% static 'kevibes/typeit-master/dist/typeit.min.js' %}"></script>
+    <!-- <script src="https://js.paystack.co/v1/paystack.js"></script> -->
+    <script src="{% static 'kevibes/WOW/dist/wow.js' %}"></script>
+    <script src="{% static 'kevibes/owl-carousel/dist/owl.carousel.js' %}"></script>
+    <!-- <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> -->
+    <script src="{% static 'kevibes/bootstrap-4.3.1-dist/js/bootstrap.js' %}"></script>
+    <script src="{% static 'kevibes/fontawesome-5/js/all.js' %}"></script>
+    <!-- <script src="{% static 'kevibes/animate.js' %}"></script>  -->
+    <script type="text/javascript">
+        navbarClose = () => {
+            document.querySelector('#side-nav').style.transform = 'translate3d(-260px, 0px, 0px)';
+            document.querySelector('.main-content').style.marginLeft = '0px';
+        }
+
+        navbarOpen = () => {
+            document.querySelector('#side-nav').style.transform = 'translate3d(0px, 0px, 0px)';
+            document.querySelector('.main-content').style.marginLeft = '260px';
+        }
+
+        new TypeIt('#message-input', {
+            speed: 50,
+            waitUntilVisible: true
+        })
+        .type('Welcome to kevibes')
+        .pause(3000)
+        .delete()
+        .type('Purchase<br> music beats, drum kits and loops')
+        .pause(3000)
+        .delete()
+        .type('We have them all in whatever genre')
+        .pause(2000)
+        .delete()
+        .type('Afro, Hip Pop Trap,')
+        .break()
+        .type('R&B, and others')
+        .pause(3000)
+        .delete()
+        .type('Rate our beats, make reviews')
+        .break()
+        .type('To support and help us improve')
+        .pause(3000)
+        .delete()
+        .type("<b style='letter-spacing: 3px'>Happy exploration!<b>")
+        .break()
+        .type("Don't forget to rate our <br>beats, kits and loops")
+        .go();
+
+        new WOW({
+            animateClass: 'animated',
+            offset: 100,
+            callback: function(box) {
+                return ;
+            }
+        }).init();
+
+        $('.owl-carousel').owlCarousel({
+            loop:true,
+            margin:10,
+            nav:false,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:3
+                },
+                1000:{
+                    items:5
+                }
+            }
+        });
+    </script>
+
+    <script src="{% static 'kevibes/script.js' %}"></script>
+    {% block extrascripts %}
+    {% endblock %}
+    
+    
+</body>
+</html>
