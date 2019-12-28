@@ -65,6 +65,9 @@
                     </script>
                 {% endif %}
             {% endif %}
+            
+            {{ user.email }}
+
             {% if user.order_set.all %}
                 {% for order in user.order_set.all %}
                     {% if order.ordered %}

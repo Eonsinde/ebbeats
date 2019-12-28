@@ -214,7 +214,6 @@ def forms(request):
 def signup(request):
     if request.method == 'POST':
         if request.POST is not None:
-            print(request.POST)
             new_user = User()
             new_user.username = request.POST['username']
             new_user.email = request.POST['email']
@@ -252,6 +251,7 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.profile.email_confirmed = True
         print(user.profile.email_confirmed)
+        user.profile.save()
         user.save()
         return HttpResponseRedirect('/dashboard/')
     else:

@@ -2,22 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b266219-d15a-4632-9c06-2943d6ca5dc7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/kevibes/templates/kevibes/acc/account_activation_email.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kevibes/tokens.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kevibes/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/kevibes/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kevibes/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/kevibes/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kevibes/templates/kevibes/album-detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/kevibes/templates/kevibes/album-detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kevibes/templates/kevibes/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/kevibes/templates/kevibes/cart.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kevibes/templates/kevibes/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/kevibes/templates/kevibes/checkout.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kevibes/templates/kevibes/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/kevibes/templates/kevibes/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kevibes/templates/kevibes/explore.html" beforeDir="false" afterPath="$PROJECT_DIR$/kevibes/templates/kevibes/explore.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kevibes/templates/kevibes/forms/contribute.html" beforeDir="false" afterPath="$PROJECT_DIR$/kevibes/templates/kevibes/forms/contribute.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kevibes/templates/kevibes/forms/forms.html" beforeDir="false" afterPath="$PROJECT_DIR$/kevibes/templates/kevibes/forms/forms.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kevibes/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/kevibes/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kevibes/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/kevibes/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicproj/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/musicproj/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicproj/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/musicproj/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -90,31 +76,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/kevibes/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="253" column="43" lean-forward="true" selection-start-line="253" selection-start-column="43" selection-end-line="253" selection-end-column="43" />
+            <state relative-caret-position="493">
+              <caret line="254" column="19" selection-start-line="254" selection-start-column="19" selection-end-line="254" selection-end-column="19" />
               <folding>
                 <element signature="e#0#64#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kevibes/templates/kevibes/acc/account_activation_email.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="20" lean-forward="true" selection-start-column="20" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kevibes/tokens.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
-              <folding>
-                <element signature="e#0#66#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -324,7 +289,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4979424" visible="true" weight="0.13020833" />
       <window_info id="Structure" order="1" show_stripe_button="false" sideWeight="0.5020576" side_tool="true" weight="0.122023806" />
@@ -467,13 +431,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kevibes/templates/kevibes/acc/account_activation_email.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="20" lean-forward="true" selection-start-column="20" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/kevibes/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -508,10 +465,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/kevibes/templates/kevibes/acc/account_activation_email.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="20" lean-forward="true" selection-start-column="20" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/kevibes/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="253" column="43" lean-forward="true" selection-start-line="253" selection-start-column="43" selection-end-line="253" selection-end-column="43" />
+        <state relative-caret-position="493">
+          <caret line="254" column="19" selection-start-line="254" selection-start-column="19" selection-end-line="254" selection-end-column="19" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
           </folding>
