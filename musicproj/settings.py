@@ -27,7 +27,8 @@ SECRET_KEY = '#*j^e0f7_u141us3)6zd_v_fp9h*i&jnxy&3oss#86i5v!331_'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-
+    'https://kevibes.herokuapp.com/',
+    '127.0.0.1:8000'
 ]
 
 

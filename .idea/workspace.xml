@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b266219-d15a-4632-9c06-2943d6ca5dc7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/kevibes/static/kevibes/animate.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kevibes/templates/kevibes/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/kevibes/templates/kevibes/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/musicproj/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/musicproj/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,8 +20,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/musicproj/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="141" column="47" selection-start-line="141" selection-start-column="47" selection-end-line="141" selection-end-column="47" />
+            <state relative-caret-position="510">
+              <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
               <folding>
                 <element signature="e#310#319#0" expanded="true" />
               </folding>
@@ -266,6 +268,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4979424" visible="true" weight="0.13020833" />
       <window_info id="Structure" order="1" show_stripe_button="false" sideWeight="0.5020576" side_tool="true" weight="0.122023806" />
@@ -463,8 +466,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/musicproj/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="141" column="47" selection-start-line="141" selection-start-column="47" selection-end-line="141" selection-end-column="47" />
+        <state relative-caret-position="510">
+          <caret line="30" column="19" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
           <folding>
             <element signature="e#310#319#0" expanded="true" />
           </folding>
