@@ -18,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/musicproj/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="38" column="19" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="19" />
+            <state relative-caret-position="153">
+              <caret line="141" column="47" selection-start-line="141" selection-start-column="47" selection-end-line="141" selection-end-column="47" />
               <folding>
                 <element signature="e#310#319#0" expanded="true" />
               </folding>
@@ -184,32 +184,6 @@
             </path>
             <path>
               <item name="musicproj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="musicproj" type="462c0819:PsiDirectoryNode" />
-              <item name="kevibes" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="musicproj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="musicproj" type="462c0819:PsiDirectoryNode" />
-              <item name="kevibes" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="kevibes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="musicproj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="musicproj" type="462c0819:PsiDirectoryNode" />
-              <item name="kevibes" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="kevibes" type="462c0819:PsiDirectoryNode" />
-              <item name="acc" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="musicproj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="musicproj" type="462c0819:PsiDirectoryNode" />
-              <item name="musicproj" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="musicproj" type="b2602c69:ProjectViewProjectNode" />
               <item name="Scratches and Consoles" type="1a2a3e82:ScratchProjectViewPane$MyProjectNode" />
             </path>
           </expand>
@@ -292,9 +266,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4979424" visible="true" weight="0.13020833" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4979424" visible="true" weight="0.13020833" />
       <window_info id="Structure" order="1" show_stripe_button="false" sideWeight="0.5020576" side_tool="true" weight="0.122023806" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -307,7 +280,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="9" />
-      <window_info active="true" anchor="bottom" x="17" y="306" width="1332" height="155" id="Terminal" order="10" sideWeight="0.4985119" visible="true" weight="0.2642089" />
+      <window_info anchor="bottom" x="17" y="306" width="1332" height="155" id="Terminal" order="10" sideWeight="0.4985119" weight="0.2642089" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -490,8 +463,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/musicproj/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="38" column="19" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="19" />
+        <state relative-caret-position="153">
+          <caret line="141" column="47" selection-start-line="141" selection-start-column="47" selection-end-line="141" selection-end-column="47" />
           <folding>
             <element signature="e#310#319#0" expanded="true" />
           </folding>
