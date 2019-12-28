@@ -18,9 +18,6 @@ from kevibes.tokens import account_activation_token
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 
-# payment thingy
-from payments import get_payment_model, RedirectNeeded
-
 
 # Create your views here.
 
