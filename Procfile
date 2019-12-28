@@ -1,1 +1,1 @@
-web: gunicorn clinic.wsgi --log-file -
+web: gunicorn musicproj.wsgi --log-file -

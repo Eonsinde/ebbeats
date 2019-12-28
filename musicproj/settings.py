@@ -28,7 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'https://kevibes.herokuapp.com/',
-    '127.0.0.1:8000'
 ]
 
 
