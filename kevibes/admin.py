@@ -3,14 +3,14 @@ from kevibes.models import *
 
 # Register your models here.
 
-#
-# @admin.register(Rating)
-# class RatingAdmin(admin.ModelAdmin):
-#     pass
+
+@admin.register(Rating)
+class RatingAdmin(admin.ModelAdmin):
+    pass
 
 
-@admin.register(Image)
-class UserImageAdmin(admin.ModelAdmin):
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
     pass
 
 

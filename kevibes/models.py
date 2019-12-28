@@ -33,14 +33,14 @@ class Contact(models.Model):
     def __str__(self):
         return f'{self.name}: {self.message[:10]}...'
 
-#
-# class Rating(models.Model):
-#     value = models.IntegerField(default=0)
-#     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-#     product = models.ForeignKey('Product', on_delete=models.CASCADE)
-#
-#     def __str__(self):
-#         return self.user + ' ' + self.value
+
+class Rating(models.Model):
+    value = models.IntegerField(default=0)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user + ' ' + self.value
 
 
 class Product(models.Model):
@@ -93,20 +93,28 @@ class Order(models.Model):
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField(auto_now_add=True)
     ordered = models.BooleanField(default=False)
+    transaction_ref = models.CharField(default='', max_length=100,
+                                       help_text="This is auto filled after an "
+                                                 "order's state is set to `True` i.e is ordered")
 
     def __str__(self):
         return f'order {self.id}'
 
+    def set_transaction_ref(self, value):
+        if self.ordered:
+            self.transaction_ref = value
+
 
 # other details for the user model
-class Image(models.Model):
+class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)
-    cover_image = models.ImageField(upload_to='cover_images/', null=True, blank=True)
+    display_picture = models.ImageField(upload_to='profile_images/', null=True, blank=True)
+    cover_picture = models.ImageField(upload_to='cover_images/', null=True, blank=True)
+    email_confirmed = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username + ' related images'
 
     class Meta:
-        verbose_name = 'User-related-images'
+        verbose_name = 'Users Profile'
 

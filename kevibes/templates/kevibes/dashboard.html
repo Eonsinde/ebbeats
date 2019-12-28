@@ -22,11 +22,10 @@
     <section class="dashboard-section mb-5">
         <header class='d-flex dashboard-header m-0 shadow-lg' style="height: 250px;">
             <div class='d-flex flex-column bg-dark justify-content-center text-center py-3 px-2' style='flex:1; height: 100%;'>
-                {% if user.image.profile_image != '' %}
-                    <img src="{{ user.image.profile_image.url }}" class='m-auto' alt="" width="140px" height="145px" style='border-radius: 100%;'>
+                {% if user.profile.display_picture != '' %}
+                    <img src="{{ user.profile.display_picture.url }}" class='m-auto' alt="" width="140px" height="145px" style='border-radius: 100%;'>
                     <h5 class='text-app mt-2'>{{ user.username }}</h5>
                 {% else %}
-                {% load static %}
                     <div>
                         <i class="text-app text-center fas fa-user fa-10x"></i>
                     </div>
@@ -34,8 +33,8 @@
                 {% endif %}
             </div>
             <div class='' style='flex: 4'>
-                {% if user.image.cover_image != '' %}
-                    <div class="images-show m-auto" style='width: 100%; height: 100%; background: linear-gradient(rgba(0, 0, 0, 0.253), rgba(0,0,0,.5)), url("{{ user.image.cover_image.url }}") center center; background-size: cover;'></div>
+                {% if user.profile.cover_picture != '' %}
+                    <div class="images-show m-auto" style='width: 100%; height: 100%; background: linear-gradient(rgba(0, 0, 0, 0.616), rgba(0, 0, 0, 0.644)), url("{{ user.profile.cover_picture.url }}") center center; background-size: cover;'></div>
                 {% else %}
                     <div class="images-show m-auto d-flex text-center justify-content-center align-items-center" style='width: 100%; height: 100%; background: linear-gradient(rgba(0, 0, 0, 0.253), rgba(0,0,0,.5));'>
                         <h3 class='text-app'>NO COVER IMAGE</h3>
@@ -45,7 +44,38 @@
         </header>
 
         <article class='text-app'>
-            {{ user.email }}
+            {% if not user.is_superuser %}
+                {% if user.profile.email_confirmed %}
+                    <div>
+                        Account Status: <span>Account Verified</span>
+                    </div>
+                {% else %}
+                    <div>
+                        Account Status: <a href='#' class='verify-acc-btn'>Verify Account</a>
+                    </div>
+                    <script>
+                        verBtn = document.querySelector('.verify-acc-btn');
+                        verBtn.onclick = () => {
+                            $.get('/verify-account/')
+                            .done(res => {
+                                console.log(res);
+                                showAlert(`${res.message}`, 'info', 5000, 'fadeIn');
+                            });
+                        }
+                    </script>
+                {% endif %}
+            {% endif %}
+            {% if user.order_set.all %}
+                {% for order in user.order_set.all %}
+                    {% if order.ordered %}
+                        <p>{{ order }}</p>
+                    {% else %}
+                        <p>This user has a current order</p>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <p>No records of any order</p>
+            {% endif %}
         </article>
     </section>
 {% endblock %}

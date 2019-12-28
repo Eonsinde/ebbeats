@@ -108,7 +108,7 @@
             let submitTrials = 0;
             btn.addEventListener('click', function(){
                 submitTrials++;
-                $.get(`/kevibes/add-to-cart/${productsID[index].value}/`)
+                $.get(`/add-to-cart/${productsID[index].value}/`)
                     .done((res, status) => {
                         if (res.message === 'failure'){
                             console.log(status);
@@ -135,7 +135,7 @@
             addAllTrials++;
             let response = '';
             productsID.forEach((product_id_input, index) => {
-                $.get(`/kevibes/add-to-cart/${product_id_input.value}/`)
+                $.get(`/add-to-cart/${product_id_input.value}/`)
                 .done((res, status) => {
                     return ;
                 }); // end of ajax section

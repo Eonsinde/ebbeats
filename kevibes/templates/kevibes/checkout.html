@@ -115,7 +115,7 @@
                 <a href="{% url 'kevibes:album-detail' ord_item.item.album.pk %}" class="my-0 text-app d-block">{{ ord_item.item }}</a>
                 <small class="text-muted">{{ ord_item.item.album }}</small>
               </div>
-              <span class="text-muted">${{ ord_item.item.price }}</span>
+              <span class="text-muted">${{ ord_item.item.get_actual_price }}</span>
               <input type="hidden" value={{ord_item.item.get_actual_price }} name='product-price' id='product-price'>
             </li>
             {% endfor %}
@@ -192,11 +192,19 @@
           alert('success. transaction ref is ' + response.reference);
           // make a post request to the server here and change the ordered field in the current order to True
           $.post(
-            "/"
+            "/payment-successful/",
+            {'message': 'success', 'transaction_ref': `${response.reference}`}
+          )
+          .done(function(response){
+            console.log(response);
+           }
+          ).fail(function(e){
+              console.log(e.message);
+            }
           );
       },
       onClose: function(){
-          alert('window closed');
+         console.log("Payment window closed");
       }
       });
       handler.openIframe();
