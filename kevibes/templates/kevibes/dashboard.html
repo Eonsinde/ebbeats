@@ -4,6 +4,17 @@
 
 {% block extrastyles %}
     <style>
+        li{
+            padding: 10px;
+        }
+
+        li:nth-child(odd){
+            background: #212122;
+        }
+
+        li:nth-child(even){
+            background: #242525;
+        }
     
     </style>
 {% endblock %}
@@ -27,7 +38,7 @@
                     <h5 class='text-app mt-2'>{{ user.username }}</h5>
                 {% else %}
                     <div>
-                        <i class="text-app text-center fas fa-user fa-10x"></i>
+                        <i class="text-app text-center fas fa-user fa-7x"></i>
                     </div>
                     <h5 class='text-app mt-2'>{{ user.username }}</h5>
                 {% endif %}
@@ -43,16 +54,49 @@
             </div>
         </header>
 
-        <article class='text-app'>
+        <article class='text-app' style='margin-bottom: 75px'>
             {% if not user.is_superuser %}
                 {% if user.profile.email_confirmed %}
-                    <div>
-                        Account Status: <span>Account Verified</span>
+                    <div class='row m-0 p-2 bg-danger'>
+                        <div class='col-md-6 text-md-left text-sm-center text-center mb-md-0 mb-sm-3 mb-3'>
+                            Account Status: Account Verified
+                        </div>
+                        <div class='col-md-6 text-md-right text-sm-center text-center'>
+                            Email: {{ user.email }}
+                        </div>
                     </div>
-                {% else %}
-                    <div>
-                        Account Status: <a href='#' class='verify-acc-btn'>Verify Account</a>
+                    {% if user.order_set.all %}
+                        <div class='mt-3 bg-info p-3 text-md-left text-sm-center text-center'>
+                            <p class='px-3 py-0 fa-2x m-0'>Order Info</p>
+                            <p class='px-3 py-0 m-0'>Monitor Details On Orders That Have Been Made Successfully</p>
+                        </div>
+                        <ul>
+                            {% for order in user.order_set.all %}
+                                {% if order.ordered %}
+                                    <li>{{ order }}</li>
+                                {% else %}
+                                    <li>No orders have been made on products</li>
+                                {% endif %}
+                            {% endfor %}
+                            <li>You have a currently uncompleted order <a href="{% url 'kevibes:cart' %}">View</a></li>
+                        </ul>
+                    {% else %}
+                        <p>No records of any order</p>
+                    {% endif %}
+                {% else %}<!-- end of else statement for profile.email_confirmed -->
+                    <div class='row m-0 p-2 bg-danger'>
+                        <div class='col-md-6 text-md-left text-sm-center text-center mb-md-0 mb-sm-3 mb-3'>
+                            Account Status: <a href='#' class='verify-acc-btn text-app' style='text-decoration: underline;'>Verify Account</a>
+                        </div>
+                        <div class='col-md-6 text-md-right text-sm-center text-center'>
+                            Email: {{ user.email }}
+                        </div>
                     </div>
+                    <div class='bg-dark mt-3 p-4 text-center'>
+                        <p class='m-0'>No details to show abouts orders made on products</p>
+                        <small class='text-muted'>Verify account and start monitoring orders made on products</small>
+                    </div>
+
                     <script>
                         verBtn = document.querySelector('.verify-acc-btn');
                         verBtn.onclick = () => {
@@ -64,20 +108,20 @@
                         }
                     </script>
                 {% endif %}
-            {% endif %}
             
-            {{ user.email }}
-
-            {% if user.order_set.all %}
-                {% for order in user.order_set.all %}
-                    {% if order.ordered %}
-                        <p>{{ order }}</p>
-                    {% else %}
-                        <p>This user has a current order</p>
-                    {% endif %}
-                {% endfor %}
-            {% else %}
-                <p>No records of any order</p>
+            {% else %}<!-- if user is admin or superuser -->
+                <div class='row m-0 p-2 bg-danger'>
+                    <div class='col-md-6 text-md-left text-sm-center text-center mb-md-0 mb-sm-3 mb-3'>
+                        Account Status: Account Verified</a>
+                    </div>
+                    <div class='col-md-6 text-md-right text-sm-center text-center'>
+                        Email: {% if user.email %} {{ user.email }} {% else %} admin@kevibes.com {% endif %}
+                    </div>
+                </div>
+                <div class='bg-dark mt-3 p-4 text-center'>
+                    <p class='m-0'>Visit the admin site for proper adminstration</p>
+                    <small class='text-muted'>Note: don't try to update profile from the frontend; all <br> admin related matters should be handled in the admin site <a href="https://kevibes.herokuapp.com/admin" target=_blank>Go To Admin Panel</a></small>
+                </div>
             {% endif %}
         </article>
     </section>

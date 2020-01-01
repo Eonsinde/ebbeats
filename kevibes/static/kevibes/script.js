@@ -11,7 +11,6 @@ showAlert = (message, theme, duration, fade_action) => {
         setTimeout(() => {
             div.style.visibility = '';
         }, duration);
-        // setTimeout(() => { div.classList.remove('wow'); document.body.removeChild(div); }, duration);
     }else{ // if present 
         document.body.removeChild(document.querySelector('.message-box'));
         let div = document.createElement('div');
@@ -22,7 +21,6 @@ showAlert = (message, theme, duration, fade_action) => {
         setTimeout(() => {
             div.style.visibility = '';
         }, duration);
-        // setTimeout(() => { div.classList.remove('wow'); document.body.removeChild(div); }, duration);
     }
 }
 

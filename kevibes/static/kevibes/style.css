@@ -204,7 +204,6 @@ footer{
     height: 100vh;
     overflow-y: auto;
     background: linear-gradient(rgba(0,0,0,.5), rgba(0, 0, 0, 0.281)), url('./images/colorful_vintage_stripes-wallpaper-2560x1600.jpg') center center/cover;
-    /* background: #232425; */
     position: relative;
     overflow-x: hidden;
 }
@@ -214,16 +213,16 @@ footer{
 }
 
 #message-input{
-    margin-top: 140px;
+    margin-top: 120px;
 }
 
 .owl-carousel{
-    position: absolute;
+    /* position: absolute;
     width: 67pc;
     margin: auto;
     bottom: 75px;
     box-sizing: border-box;
-    margin: 0;
+    margin: 0; */
 }
 
 .owl-stage{
@@ -262,7 +261,8 @@ footer{
     }
 
     #message-input{
-        margin-top: 50px;
+        margin-top: 70px;
+        font-size: 2pc;
     }
 
     .navbar-toggler{
@@ -280,5 +280,15 @@ footer{
     .main-content{
         margin-left: 0px;
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 575px){
+    /* for the main header nav of our application */
+    .h-right{
+        margin-top: 6px;
+        /* background: #212122; */
+        padding: 10px 0px;
+        box-shadow: 0 0 10px #000000bc;        
     }
 }

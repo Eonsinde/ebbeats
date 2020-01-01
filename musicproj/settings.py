@@ -150,7 +150,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
-LOGIN_URL = '/kevibes/forms/'
+LOGIN_URL = '/forms/'
 
 SITE_ID = 1
 

@@ -131,7 +131,7 @@
                     'subject': contactForm.find('input[name="subject"]').val(),
                     'message': contactForm.find('textarea[name="message"]').val()
                 };
-                $.post('/kevibes/contact/', new_contact)
+                $.post('/contact/', new_contact)
                     .done(res => {
                         if (res.response === 'success'){
                             showAlert('Message Successfully Sent', 'info', 5000, 'fadeIn');

@@ -6,8 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{%block title%}Kevibes - Home{%endblock%}</title>
+
     <link rel="stylesheet" href="{% static 'kevibes/bootstrap-4.3.1-dist/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'kevibes/fontawesome-5/css/all.css' %}">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     <link rel="stylesheet" href="{% static 'kevibes/WOW/css/libs/animate.css' %}">
     <link rel="stylesheet" href="{% static 'kevibes/owl-carousel/dist/assets/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static 'kevibes/owl-carousel/dist/assets/owl.theme.default.min.css' %}">
@@ -19,12 +23,12 @@
 <body>
     {% block all_content %}
     {% load cart_template_tag %}
-    <header class='bg-danger d-flex justify-content-between py-2 px-3'>
-        <div class='h-left d-flex justify-content-between align-items-center'>
+    <header class='bg-danger d-flex justify-content-between py-2 px-3 flex-md-row flex-sm-row flex-column'>
+        <div class='h-left d-flex flex-md-row flex-sm-row flex-row-reverse align-items-center justify-content-md-start justify-content-sm-start justify-content-between'>
             <a href="#" class='navbar-toggler' onclick="navbarOpen()"><i class='fas fa-bars'></i></a>
             <a href="#" class='headerBrand text-uppercase'>KEVIBES</a>
         </div>
-        <div class='h-right d-flex justify-content-between align-items-center'>
+        <div class='h-right d-flex justify-content-md-between align-items-center justify-content-sm-center justify-content-center'>
             <div class="drop-down">
                 <a href="#" class='important-btn mr-2'><img src="" alt=""><i class='fas fa-cog'></i></a>
                 <div class="drop-down-content bg-dark text-left">
@@ -41,7 +45,6 @@
             </div>
             <div class="cart-btn-container mr-3" style='position: relative;'>
                 <a href="{% url 'kevibes:cart' %}" class='cart-link'><i class='fas fa-shopping-bag'></i></a>
-                <!-- <span class='text-center text-app' style='font-size: .8rem; position: absolute; border-radius: 100%; left:23px; right: 0; bottom: 8px; padding: 2px 2px;'>{{ request.user|cart_item_count }}</span> -->
             </div>
             {% if not user.is_authenticated %}
                 <a href="{% url 'kevibes:forms' %}" class='mr-3 text-uppercase' style='font-size: small;'>Log In/Sign Up</a>
@@ -79,7 +82,7 @@
             {% block content %}
             <section class="p-2 home-content" style='height: 90vh;'>
                 <h1 id='message-input' class='text-uppercase text-center text-app'></h1>
-                <h3 class='text-app text-center py-3' style='position: absolute; bottom: 310px; z-index: 2; width: 96.5%;'>Latest Releases</h3>
+                <h3 class='text-app text-center py-3' style='position: absolute; bottom: 280px; z-index: 2; width: 96.5%;'>Latest Releases</h3>
                 <div class="owl-carousel owl-theme">
                      {% for product in products %}
                         {% if forloop.counter <= 6  %}
@@ -106,11 +109,14 @@
     {% endblock %}<!-- end of the all_content block -->
 
 
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeit/6.1.1/typeit.min.js"></script>
     <script src="{% static 'kevibes/typeit-master/dist/typeit.min.js' %}"></script>
-    <script src="{% static 'kevibes/WOW/dist/wow.js' %}"></script>
     <script src="{% static 'kevibes/owl-carousel/dist/owl.carousel.js' %}"></script>
-    <script src="{% static 'kevibes/bootstrap-4.3.1-dist/js/bootstrap.js' %}"></script>
-    <script src="{% static 'kevibes/fontawesome-5/js/all.js' %}"></script>
+    <script src="{% static 'kevibes/WOW/dist/wow.js' %}"></script>
+    <script src="{% static 'kevibes/script.js' %}"></script>
     <script type="text/javascript">
         navbarClose = () => {
             document.querySelector('#side-nav').style.transform = 'translate3d(-260px, 0px, 0px)';
@@ -176,7 +182,6 @@
         });
     </script>
 
-    <script src="{% static 'kevibes/script.js' %}"></script>
     {% block extrascripts %}
     {% endblock %}
     
