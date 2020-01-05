@@ -230,7 +230,7 @@ def verify_account(request):
     subject = 'Activate Your Kevibes Account'
     message = render_to_string('kevibes/acc/account_activation_email.html', {
         'user': request.user,
-        'domain': current_site.domain,
+        'domain': 'kevibes.herokuapp.com',
         'uid': urlsafe_base64_encode(force_bytes(request.user.pk)).decode(),
         'token': account_activation_token.make_token(request.user),
     })
@@ -260,7 +260,6 @@ def login_view(request):
         if request.user.is_authenticated:
             return HttpResponseRedirect('/kevibes/')
         else:
-            print(request.POST)
             user = authenticate(username=request.POST['username'], password=request.POST['password'])
             if user is not None:
                 login(request, user)

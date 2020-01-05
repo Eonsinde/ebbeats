@@ -3,5 +3,5 @@
     <br>
     Hi {{ user.username }},
     Please click on the link below to confirm your registration:
-    http://{{ domain }}{% url 'kevibes:activate' uidb64=uid token=token %}
+    https://{{ domain }}{% url 'kevibes:activate' uidb64=uid token=token %}
 {% endautoescape %}
