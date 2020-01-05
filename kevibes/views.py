@@ -230,7 +230,7 @@ def verify_account(request):
     subject = 'Activate Your Kevibes Account'
     message = render_to_string('kevibes/acc/account_activation_email.html', {
         'user': request.user,
-        'domain': '127.0.0.1:8000',
+        'domain': current_site.domain,
         'uid': urlsafe_base64_encode(force_bytes(request.user.pk)).decode(),
         'token': account_activation_token.make_token(request.user),
     })
