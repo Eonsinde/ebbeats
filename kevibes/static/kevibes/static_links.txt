@@ -1,9 +1,9 @@
-  <!-- <link rel="stylesheet" href="{% static 'kevibes/bootstrap-4.3.1-dist/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'kevibes/bootstrap-4.3.1-dist/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'kevibes/fontawesome-5/css/all.css' %}">
     <link rel="stylesheet" href="{% static 'kevibes/WOW/css/libs/animate.css' %}">
     <link rel="stylesheet" href="{% static 'kevibes/owl-carousel/dist/assets/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static 'kevibes/owl-carousel/dist/assets/owl.theme.default.min.css' %}">
-    <link rel="stylesheet" href="{% static 'kevibes/style.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'kevibes/style.css' %}">
  
  
  
@@ -12,3 +12,27 @@
     <script src="{% static 'kevibes/owl-carousel/dist/owl.carousel.js' %}"></script>
     <script src="{% static 'kevibes/bootstrap-4.3.1-dist/js/bootstrap.js' %}"></script>
     <script src="{% static 'kevibes/fontawesome-5/js/all.js' %}"></script> -->
+
+
+
+// sensitive codes
+
+<div class="owl-carousel owl-theme">
+  {% for product in products %}
+    {% if forloop.counter <= 6  %}
+        <div class="">
+            <div class="product-placement bg-dark" style='position:relative;'>
+                <img src="{% static 'kevibes/images/colorful_vintage_stripes-wallpaper-2560x160.jpg' %}" style='opacity: .7;' height="100%" width="100%" alt="{{ product }} album cover image">
+                <div class="product-detail-dropdown slide-right d-flex align-items-center justify-content-center" style="background: linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)), url('{{ product.album.album_cover.url }}') center center; background-size: cover;">
+                    <div class='text-app'>
+                        <div>Album: {{ product.album }}</div>
+                        <div>Ratings: ******</div>
+                        More Details: <a class='text-danger' href="{% url 'kevibes:album-detail' product.album.pk %}">View</a>
+                    </div>
+                </div>
+            </div>
+            <div class='p-2 bg-dark text-app text-center'>{{ product }}</div>
+        </div>
+    {% endif %}
+{% endfor %}<!-- end of for loop -->
+</div>

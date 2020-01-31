@@ -214,9 +214,22 @@
                     <button class='py-1 px-2'><i class='fas fa-search'></i></button>
                 </form>
             </section>
+            
         </header>
         {% endblock %}
-        
+        {% if res_msg %}
+            <div class='res_msg_container bg-danger text-app py-2 px-3 mr-3 ml-3 mb-3 d-flex justify-content-between align-items-center'>
+                <span>{{ res_msg }}</span>
+                <a href="#" class='text-app close-msg'>&times;</a>
+            </div>
+
+            <script>
+                let btnClose = document.querySelector('.close-msg');
+                btnClose.addEventListener('click', function(){
+                    document.querySelector('.res_msg_container').remove();
+                });
+            </script>
+        {% endif %}
         {% block render-section %}
         <div class="row p-0 m-0">
         {% for product in products %}

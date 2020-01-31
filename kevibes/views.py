@@ -33,26 +33,33 @@ def explore(request):
     products = Product.objects.all()
     albums = Album.objects.all()
     genres = Genre.objects.all()
+    paginator = Paginator(products, 12)
+    page = request.GET.get('page')
+    products_list = paginator.get_page(page)
     if request.method == 'GET' and request.GET.get('query'):
         query = request.GET.get('query')
         query_results = products.filter(name__icontains=f'{query}')
-        paginator = Paginator(query_results, 6)
-        page = request.GET.get('page')
-        products_list = paginator.get_page(page)
-        context = {'products': products_list, 'albums': albums, 'genres': genres}
-        return render(request, 'kevibes/explore.html', context)
+        if query_results:
+            paginator = Paginator(query_results, 6)
+            page = request.GET.get('page')
+            products_list = paginator.get_page(page)
+            context = {'products': products_list, 'albums': albums, 'genres': genres}
+            return render(request, 'kevibes/explore.html', context)
+        else:
+            context = {'products': products_list, 'albums': albums, 'genres': genres, 'res_msg': "search result not found"}
+            return render(request, 'kevibes/explore.html', context)
     elif request.method == 'GET' and (request.GET.get('album') or request.GET.get('category') or request.GET.get('genre') or request.GET.get('price')):
-        products = request.session.get('products_list')
         f = ProductFilter(request.GET, queryset=products)
-        paginator = Paginator(f.qs, 6)
-        page = request.GET.get('page')
-        products_list = paginator.get_page(page)
-        context = {'products': products_list, 'albums': albums, 'genres': genres, 'filter': True}
-        return render(request, 'kevibes/explore.html', context)
+        if f.qs.exists():
+            paginator = Paginator(f.qs, 6)
+            page = request.GET.get('page')
+            products_list = paginator.get_page(page)
+            context = {'products': products_list, 'albums': albums, 'genres': genres}
+            return render(request, 'kevibes/explore.html', context)
+        else:
+            context = {'products': products_list, 'albums': albums, 'genres': genres, 'res_msg': "No match found for filters"}
+            return render(request, 'kevibes/explore.html', context)
     else:
-        paginator = Paginator(products, 12)
-        page = request.GET.get('page')
-        products_list = paginator.get_page(page)
         context = {'products': products_list, 'albums': albums, 'genres': genres}
         return render(request, 'kevibes/explore.html', context)
 
