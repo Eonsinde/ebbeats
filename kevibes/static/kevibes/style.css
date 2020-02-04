@@ -302,6 +302,10 @@ footer{
         z-index: 2;
     }
 
+    footer{ /* for my nav bar footer */
+        bottom: 100px;
+    }
+
     .main-content{
         margin-left: 0px;
         width: 100%;
@@ -315,5 +319,9 @@ footer{
         /* background: #212122; */
         padding: 10px 0px;
         box-shadow: 0 0 2px #000000bc;        
+    }
+
+    footer{ /* for my nav bar footer */
+        bottom: 150px;
     }
 }
