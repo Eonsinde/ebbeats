@@ -1,6 +1,3 @@
-let navbar = document.querySelector('#side-nav')
-
-
 showAlert = (message, theme, duration, fade_action) => {
     if (!document.querySelector('.message-box')){ // if not present 
         let div = document.createElement('div');

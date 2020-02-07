@@ -111,7 +111,7 @@
         let payBtn = document.querySelector('#pay-btn');
         payBtn.addEventListener('click', function(){
             if (emailInput.value === '' || amountDonatedInput.value === ''){
-                showAlert("Please fill in all fields", 'danger', 5000, 'fadeIn');
+                showAlert("Please fill in all fields", 'danger', 5000, 'shake');
             }else{
                 strPhoneNo = String(phoneNoInput.value);
                 formattedPhoneNo = strPhoneNo.slice(1, strPhoneNo.length-1);

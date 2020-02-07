@@ -119,12 +119,12 @@
         updateForm.on('submit', function(e){
             if (updateForm.find('input[name="password"]').val() !== updateForm.find('input[id="confirm-password"]').val()){
                 e.preventDefault();
-                showAlert("Passwords Don't match", 'danger', 5000, 'fadeIn');
+                showAlert("Passwords Don't match", 'danger', 5000, 'shake');
             }
 
             if (updateForm.find('input[name="profile-image"]').val() === '' && updateForm.find('input[name="cover-image"]').val() === '' && updateForm.find('input[name="username"]').val() === '' && updateForm.find('input[name="email"]').val() === '' && updateForm.find('input[name="password"]').val() === ''){
                 e.preventDefault();
-                showAlert("Please fill in a field", 'danger', 5000, 'fadeIn');
+                showAlert("Please fill in a field", 'danger', 5000, 'shake');
             }
         });
     </script>

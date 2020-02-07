@@ -241,7 +241,10 @@ def verify_account(request):
         'uid': urlsafe_base64_encode(force_bytes(request.user.pk)).decode(),
         'token': account_activation_token.make_token(request.user),
     })
-    request.user.email_user(subject, message)
+    try:
+        request.user.email_user(subject, message)
+    except BaseException:
+        return JsonResponse({'message': 'Oops! Try Again'})
     return JsonResponse({'message': 'Account Verification Sent'})
 
 
