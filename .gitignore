@@ -9,12 +9,22 @@
 __pycache__/
 local_settings.py
 db.sqlite3
+
+images
+bootstrap-4.3.1-dist
+fontawesome-5
+
 media
+mediafiles
+
+staticfiles
+
 static_links.txt
 animate.css
 WOW/
 frontend/
 owl-carousel/
+douche.txt
 
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
