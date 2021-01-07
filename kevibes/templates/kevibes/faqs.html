@@ -1,0 +1,92 @@
+{% extends 'kevibes/index.html' %}
+{% block title %}kevibes - FAQs{% endblock %}
+
+{% block navlinks %}
+    <a href="{% url 'kevibes:home' %}" class='navlink text-left text-uppercase'><i class='fas fa-home mr-3'></i>Home</a>
+    <a href="{% url 'kevibes:explore' %}" class='navlink text-left text-uppercase'><i class='fas fa-globe mr-3'></i>Explore</a>
+    <a href="{% url 'kevibes:contact' %}" class='navlink text-left text-uppercase'><i class='fas fa-phone-alt mr-3'></i>Contact</a>
+    <a href="{% url 'kevibes:contribute' %}" class='navlink text-left text-uppercase'><i class='fas fa-gem mr-3'></i>Contribute</a>
+    <a href="{% url 'kevibes:faqs' %}" class='navlink text-left text-uppercase active'><i class='fas fa-question-circle mr-3'></i>FAQs</a>
+{% endblock %}
+
+    {% block extrastyles %}
+    <style>
+        .accordion{
+            background-color: #dc3545;
+            color: #eee;
+            cursor: pointer;
+            padding: 13px;
+            width: 100%;
+            text-align: left;
+            border: 1px #b92f3d solid;
+            outline: none;
+            transition: 0.4s;
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: white;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+        }
+
+        .accordion.active{
+            background-color: #b92f3d;
+        }
+    </style>
+    {% endblock %}
+
+    {% block content %}
+    <div class='faq-section-container'>
+        <h3 class='faq-welcome-msg text-app pt-4 px-4 m-0'></h3>
+        <section class='faq-section p-4 mb-5'>
+            {% if questions.exists %}
+                {% for question in questions %}
+                    <div>
+                        <header class="accordion d-flex justify-content-between align-items-center">
+                            <span>{{ question.title }}</span>
+                            <i class="fas fa-plus"></i>
+                        </header>
+                        <div class="panel bg-dark text-white-50">
+                            <p>{{ question.content }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}<!-- else if no item in cart -->
+                <div class='bg-dark p-3 text-md-left text-sm-left text-center'>
+                    <h5 class='text-muted'>No Question Uploaded Yet</h5>
+                    <small class='text-muted'>Get Exploring <a href="{% url 'kevibes:explore' %}">CLICK</a></small>
+                </div>
+            {% endif %}
+        </section>
+    </div><!-- end of the background container for the form section -->
+    {% endblock %}
+
+
+{% block extrascripts %}
+    <script>
+        new TypeIt('.faq-welcome-msg', {
+                speed: 50,
+                waitUntilVisible: true
+            })
+            .type("Frequent Asked Questions <i class='fas fa-angle-double-right'>")
+            .go();
+
+        $('.accordion').on('click', function(e){
+            var panel = this.nextElementSibling;
+            var icon = this.lastElementChild;
+            if (panel.style.maxHeight){
+                this.classList.remove('active');
+                icon.className = 'fas fa-plus';
+                panel.style.maxHeight = null;
+            }else{
+                this.classList.add('active');
+                icon.className = 'fas fa-minus';
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+        
+    </script>
+{% endblock %}
+

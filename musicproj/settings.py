@@ -160,16 +160,13 @@ SITE_ID = 1
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Email Backend
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-
-"""
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_HOST_USER = 'chaplaincy.wordstudy@lmu.edu.ng'
-    EMAIL_HOST_PASSWORD = 'fellowship2019'
-    EMAIL_USE_TLS = True
-    EMAIL_PORT = 587
-"""
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'olasinde.eon@lmu.edu.ng'
+EMAIL_HOST_PASSWORD = 'olasindejesutise'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
 
 
 django_heroku.settings(locals())
