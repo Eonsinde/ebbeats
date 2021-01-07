@@ -1,7 +1,9 @@
-showAlert = (message, theme, duration, fade_action) => {
+showAlert = (message, theme, duration, fade_action) => { // psTop -> positionTop
+    console.log("Me here man");
     if (!document.querySelector('.message-box')){ // if not present 
         let div = document.createElement('div');
         div.className = `message-box bg-${theme} wow ${fade_action}`;
+        // div.style.top = `${psTop}px`;
         div.appendChild(document.createTextNode(message));
         document.body.appendChild(div);
         document.documentElement.scrollTo(0,0);
@@ -12,6 +14,7 @@ showAlert = (message, theme, duration, fade_action) => {
         document.body.removeChild(document.querySelector('.message-box'));
         let div = document.createElement('div');
         div.className = `message-box bg-${theme} wow ${fade_action}`;
+        // div.style.top = `${psTop}px`;
         div.appendChild(document.createTextNode(message));
         document.body.appendChild(div);
         document.documentElement.scrollTo(0,0);

@@ -12,31 +12,7 @@
 
     {% block extrastyles %}
     <style>
-        .table-container{
-            overflow-x: auto;
-        }
-
-        .table-container::-webkit-scrollbar {
-            height: 2px;
-            transition: .5s ease;
-        }
-        
-        /* Track */
-        .table-container::-webkit-scrollbar-track {
-            background: #858585; 
-        }
-
-        /* Handle */
-        .table-container::-webkit-scrollbar-thumb {
-            background: #434343; 
-        }
-
-        /* Handle on hover */
-        .table-container::-webkit-scrollbar-thumb:hover {
-            background: #555; 
-        }
-
-        .cart-table{
+        .records-table{
             width: 100%;
             box-sizing: border-box;
         }
@@ -89,12 +65,15 @@
 
         .form-btn:hover{
             color: #ecebeb;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+            transform: scale(1.02);
+            box-shadow: 0 0 10px #000000bc;
         }
 
         .form-btn:nth-child(2):hover{
-            color: #eeeeee; 
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+            color: #eeeeee;
+            background: #3b4ad4;
+            transform: scale(1.02);
+            box-shadow: 0 0 10px #000000bc;
         }
 
         .form-btn:focus-within{
@@ -104,11 +83,10 @@
     {% endblock %}
 
     {% block content %}
-    <div class='cart-section-container'>
-        <h3 class='cart-welcome-msg text-app pt-4 px-4 m-0'></h3>
+    <div class='records-section-container'>
+        <h3 class='records-welcome-msg text-app pt-4 px-4 m-0'></h3>
         <section class='cart-section p-4 mb-5'>
             {% if cart.items.all.exists %}
-            <div class='table-container'> <!-- needed to add this for responsiveness-->
             <table class="cart-table text-app">
                 <thead>
                     <tr>
@@ -134,14 +112,13 @@
                     {% endfor %}
                 </tbody>
             </table>
-            </div>
             <div class='p-3 mt-3 text-right d-flex justify-content-end flex-md-row flex-sm-row flex-column' style='border-top: 1px #2222227c  solid;'>
-                <a href='{% url "kevibes:explore" %}' class='form-btn d-block text-center mr-md-2 mr-sm-2 mr-0 mb-md-0 mb-sm-0 mb-2'>Continue Shopping</a>
-                <a href='{% url "kevibes:checkout" %}' class='form-btn d-block text-center'>Proceed to checkout</a>
+                <a href='{% url "kevibes:explore" %}' class='form-btn d-block text-center mr-md-2 mr-sm-2 mr-0 mb-md-0 mb-sm-0 mb-2'>Download All</a>
+                <a href='{% url "kevibes:checkout" %}' class='form-btn d-block text-center'>Clear All</a>
             </div>
             {% else %}<!-- else if no item in cart -->
                 <div class='bg-dark p-3 text-md-left text-sm-left text-center'>
-                    <h5 class='text-muted'>No Item in cart</h5>
+                    <h5 class='text-muted'>No purchases have been made yet</h5>
                     <small class='text-muted'>Get Shopping <a href="{% url 'kevibes:explore' %}">CLICK</a></small>
                 </div>
             {% endif %}
@@ -152,7 +129,7 @@
 
 {% block extrascripts %}
     <script>
-        new TypeIt('.cart-welcome-msg', {
+        new TypeIt('.records-welcome-msg', {
                 speed: 50,
                 waitUntilVisible: true
             })

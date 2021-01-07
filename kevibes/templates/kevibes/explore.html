@@ -4,14 +4,20 @@
 
 {% block extrastyles %}
     <style>
+        .filter-query-container{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .query-form{
             border: 1px #cac8c8 solid;
             transition: .3s ease;
         }
 
-        .query-form:focus-within{
+        /* .query-form:focus-within{
             transform: scale(1.1);
-        }
+        } */
 
         .query-form input{
             padding: 3px 5px;
@@ -25,10 +31,6 @@
             border:none; 
             outline: none;
             color: #ecebeb;
-        }
-
-        .card{
-            border: 1px #313030 solid;
         }
 
         .filter-dropdown{
@@ -102,6 +104,64 @@
             display: block;
         }
 
+        .my-grid{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 1rem;
+        }
+
+        @media screen and (max-width: 1200px) {
+            .my-grid{
+                gap: 2px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .my-grid-item{
+                transform: scale(.9);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .my-grid{
+                gap: 10px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .my-grid-item{
+                transform: scale(1);
+            }
+        }
+
+        @media screen and (max-width: 575px) {
+            .my-grid{
+                gap: 2px;
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            .my-grid-item{
+                transform: scale(.9);
+            }
+        }
+
+        
+
+        .card{
+            border: 1px #313030 solid;
+            border-radius: none !important;
+            box-shadow: 0 0 8px #111 !important;
+            transition: .5s ease;
+        }
+
+        .card:hover{
+            box-shadow: 0 0 14px #111 !important;
+        }
+
+        .card-img-top{
+            object-fit: cover;
+            border-radius: none;
+        }
+
         .preview-dropdown{
             position: relative;
         }
@@ -153,27 +213,69 @@
             display: block;
         }
 
+        @media screen and (max-width: 575px) {
+            .filter-query-container{
+                flex-direction: column-reverse;
+                padding: 0 1.2rem;
+            }
+
+            .filter-query-container > *{
+                width: 100%;
+            }
+
+            .query-form{
+                padding: 4px 7px;
+                margin-bottom: 10px;
+                justify-content: space-between !important;
+            }
+
+            .query-form > input{
+                flex: 2;
+            }
+
+            .query-form > button{
+                /* flex: 1; */
+            }
+
+            .filter-section{
+                /* background: red; */
+            }
+
+            .filter-link{
+                /* border: 1px #ecebeb solid;
+                padding: 7px; */
+                width: 100%;
+                text-align: center;
+            }
+
+            .filter-dropdown-content{
+                z-index: 3;
+                box-shadow: 0 0 10px #000000bc;
+                width: 100%;
+            }
+        }
+
     </style>
 {% endblock %}
 
 
 {% block navlinks %}
- <a href="{% url 'kevibes:home' %}" class='navlink text-left text-uppercase'><i class='fas fa-home mr-3'></i>Home</a>
+<a href="{% url 'kevibes:home' %}" class='navlink text-left text-uppercase'><i class='fas fa-home mr-3'></i>Home</a>
 <a href="{% url 'kevibes:explore' %}" class='navlink text-left text-uppercase active'><i class='fas fa-globe mr-3'></i>Explore</a>
 <a href="{% url 'kevibes:contact' %}" class='navlink text-left text-uppercase'><i class='fas fa-phone-alt mr-3'></i>Contact</a>
 <a href="{% url 'kevibes:contribute' %}" class='navlink text-left text-uppercase'><i class='fas fa-gem mr-3'></i>Contribute</a>
-<a href="#" class='navlink text-left text-uppercase'><i class='fas fa-question-circle mr-3'></i>FAQs</a>
+<a href="{% url 'kevibes:faqs' %}" class='navlink text-left text-uppercase'><i class='fas fa-question-circle mr-3'></i>FAQs</a>
 {% endblock %}
 
 
 {% block content %}
     <section class='p-0 explore-section bg-dark py-2' style='margin-bottom: 75px'>
         {% block display_search_filters %}
-        <header class='px-3 d-flex flex-lg-row flex-md-row flex-sm-column flex-column justify-content-md-between align-items-md-center mt-3 mb-4'>
-            <p id='explore-welcome-msg' class='m-0 text-uppercase text-white m-md-0 mb-sm-4 mb-4'></p>
-            <section class='d-flex align-items-center justify-content-between'>
+        <header class='px-3 mb-md-4 mb-sm-4 mb-1'>
+            <h5 id='explore-welcome-msg' class='text-md-left text-sm-left text-center  text-uppercase text-white m-0 m-md-0 mb-sm-4 mb-2 py-3'></h5>
+            <section class='filter-query-container'>
                 <div class="filter-section filter-dropdown d-flex align-items-center justify-content-between">
-                    <a href="#" class='text-app mr-3 filter-link'>Filters <i class='fas fa-filter'></i></a>
+                    <a href="#" class='text-app filter-link'>Filters <i class='fas fa-filter'></i></a>
                     <form action='{% url "kevibes:explore" %}' method="GET" class='filter-form filter-dropdown-content'>
                         <div class="filter-fieldset">
                             <label for="">Price:</label>
@@ -209,7 +311,7 @@
                         <button class='btn-block filter-btn'>Apply Filter</button>
                     </form>
                 </div>
-                <form action='{% url "kevibes:explore" %}' method='GET' class='ml-2 query-form d-flex justify-content-center'>
+                <form action='{% url "kevibes:explore" %}' method='GET' class='query-form d-flex justify-content-center'>
                     <input class='bg-transparent' type="text" name='query' id='query-input' placeholder="Search...">
                     <button class='py-1 px-2'><i class='fas fa-search'></i></button>
                 </form>
@@ -231,11 +333,12 @@
             </script>
         {% endif %}
         {% block render-section %}
-        <div class="row p-0 m-0">
+        <div class="my-grid">
         {% for product in products %}
-            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
-                <div class="card mb-3 shadow-sm bg-transparent">
-                    <img class="card-img-top" src='{{ product.album.album_cover.url }}' style="height: 225px; width: 100%; display: block;">
+            <div class="my-grid-item">
+                <div class="card border-none bg-transparent">
+                	{% load static %}
+                    <img class="card-img-top" src='{% if product.album.album_cover.url != "" %}{{ product.album.album_cover.url }}{% else %}{% static "kevibes/images/default_album_cover.jpg" %}{% endif %}' style="height: 225px; width: 100%; display: block;">
                     <div class="card-body py-4 px-2" style="border-top: 1px #313030 solid">
                         <div class='d-flex justify-content-between align-items-center'>
                             <p class="card-text text-light">{{ product.name }}</p>
@@ -254,7 +357,7 @@
                                     <p>Genre: {% for genre in product.genre.filter %}{% if forloop.counter != product.genre.count %}{{ genre }}, {% else %} {{ genre }} {% endif %} {% endfor %}</p>
                                     <p>Rating: ******</p>
                                     <div class="d-flex justify-content-between align-items-center py-2 px-1">
-                                        <a href="#" class='preview-play-btn' title='preview'><i class='fas fa-play-circle fa-2x'></i><audio class='product-sample' src="{{ product.sample.url }}"></audio> </a>
+                                        <!-- <a href="#" class='preview-play-btn' title='preview'><i class='fas fa-play-circle fa-2x'></i><audio class='product-sample' src="{{ product.sample.url }}"></audio> </a> -->
                                         <small class="text-muted">{{ product.duration }}</small>
                                     </div>
                                 </div>
@@ -317,7 +420,6 @@
             }
         });
 
-
         filterForm.on('submit', function(e){
             if (filterForm.find('input[name="price"]').val() === '' && filterForm.find('select[name="album"]').val() === '' && filterForm.find('select[name="genre"]').val() === '' && filterForm.find('select[name="category"]').val() === ''){
                 e.preventDefault();
@@ -355,16 +457,18 @@
                 $.get(`/add-to-cart/${products_id[index].value}/`)
                     .done((res, status) => {
                         if (res.message === 'failure'){
-                            console.log(status);
+                            showAlert("Failed: You might not be logged in", 'danger', 5000, 'shake');
                         }else if(res.message === 'present'){
                             if (submitTrials >= 2){
                                 showAlert('Already in cart', 'dark', 5000, 'shake');
                             }else{
                                 showAlert('Already in cart', 'dark', 5200, 'fadeIn');
                             }
+                        }else if(res.message === 'success'){
+                            showAlert('Added to cart', 'info', 5500, 'fadeIn');
                         }
                         else{
-                            showAlert('Added to cart', 'info', 5500, 'fadeIn');
+                        	console.log(status);
                         }
                     });
             });
@@ -380,7 +484,6 @@
                 handleControls(beats[index], btn, previewPlayBtns, beats, 'fa-2x');
             });
         });
-
 
     </script>
 {% endblock %}

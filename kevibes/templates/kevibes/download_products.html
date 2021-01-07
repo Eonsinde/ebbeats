@@ -1,0 +1,62 @@
+{% extends 'kevibes/index.html' %}
+{% block title %}Kevibes - Download Purchased Products{% endblock %}
+
+
+{% block navlinks %}
+    <a href="{% url 'kevibes:home' %}" class='navlink text-left text-uppercase'><i class='fas fa-home mr-3'></i>Home</a>
+    <a href="{% url 'kevibes:explore' %}" class='navlink text-left text-uppercase'><i class='fas fa-globe mr-3'></i>Explore</a>
+    <a href="{% url 'kevibes:contact' %}" class='navlink text-left text-uppercase'><i class='fas fa-phone-alt mr-3'></i>Contact</a>
+    <a href="{% url 'kevibes:contribute' %}" class='navlink text-left text-uppercase'><i class='fas fa-gem mr-3'></i>Contribute</a>
+    <a href="{% url 'kevibes:faqs' %}" class='navlink text-left text-uppercase'><i class='fas fa-question-circle mr-3'></i>FAQs</a>
+{% endblock %}
+
+
+{% block extrastyles %}
+    <style>
+         .download-btn{
+            background: transparent;
+            color: #dc3545;
+            border: 1px #dc3545 solid;
+            border-radius: 3px;
+            transition: .5s ease;
+        }
+
+        .download-btn:hover{
+            color: #eeeeee;
+            background: #dc3545;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+        }
+
+        .download-btn:focus-within{
+            outline: none;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="main-container bg-dark container">
+        <h2 class="text-white my-3 download-welcome-msg"></h2>
+        <div class="row p-0">
+            {% for orderItem in order.items.all %}
+                <div class="col-md-6 col-sm-12 col-12 my-2">
+                    <div class="main-body bg-dark py-2 px-3 text-white shadow shadow-sm d-flex justify-content-between align-items-center">
+                        {{ orderItem.item }}
+                        <a href="{{ orderItem.item.file.url }}" target="__blank" class="btn btn-sm download-btn">Download</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block extrascripts %}
+    <script>
+        new TypeIt('.download-welcome-msg', {
+            speed: 50,
+            waitUntilVisible: true
+        })
+        .pause(500)
+        .type('Make Your Downloads Here')
+        .go();
+    </script>
+{% endblock %}

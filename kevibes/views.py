@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, HttpResponseBadRequest
 from django.views import generic
 from kevibes.models import *
 from django.core.paginator import Paginator
@@ -7,8 +7,8 @@ from django.core.mail import send_mail
 import smtplib
 from kevibes.filters import *
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.models import User, Permission
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes
@@ -132,6 +132,10 @@ def update_profile(request):
     return render(request, 'kevibes/forms/update_profile.html')
 
 
+def faqs(request):
+    return render(request, "kevibes/faqs.html", context={'questions': FAQ.objects.all()})
+
+
 @login_required
 def cart(request):
     order = Order.objects.filter(user=request.user, ordered=False)
@@ -141,29 +145,31 @@ def cart(request):
         return render(request, 'kevibes/cart.html')
 
 
-@login_required
 def add_to_cart(request, pk):
-    try:
-        product = Product.objects.get(pk=pk)
-    except Product.DoesNotExist:
-        return JsonResponse({'message': 'failure'})
-    else:
-        order_qs = Order.objects.filter(user=request.user, ordered=False)
-        if order_qs.exists():
-            order = order_qs[0]
-            # check if the order item is in the order
-            if order.items.filter(item__pk=product.id).exists():
-                return JsonResponse({'message': 'present'})
-            else:  # if not in order add it
+    if request.user.is_authenticated:
+        try:
+            product = Product.objects.get(pk=pk)
+        except Product.DoesNotExist:
+            return JsonResponse({'message': 'failure'})
+        else:
+            order_qs = Order.objects.filter(user=request.user, ordered=False)
+            if order_qs.exists():
+                order = order_qs[0]
+                # check if the order item is in the order
+                if order.items.filter(item__pk=product.id).exists():
+                    return JsonResponse({'message': 'present'})
+                else:  # if not in order add it
+                    order_item = OrderItem.objects.create(item=product, user=request.user)
+                    order.items.add(order_item)
+                    return JsonResponse({'message': 'success'})
+            else:
+                order = Order.objects.create(user=request.user, ordered_date=timezone.now())
                 order_item = OrderItem.objects.create(item=product, user=request.user)
                 order.items.add(order_item)
+                order.save()
                 return JsonResponse({'message': 'success'})
-        else:
-            order = Order.objects.create(user=request.user, ordered_date=timezone.now())
-            order_item = OrderItem.objects.create(item=product, user=request.user)
-            order.items.add(order_item)
-            order.save()
-            return JsonResponse({'message': 'success'})
+    else:
+        return JsonResponse({"message": 'failure'})
 
 
 @login_required
@@ -205,13 +211,31 @@ def payment_success(request):
         order.ordered = True
         order.set_transaction_ref(request.POST.get('transaction_ref'))
         order.save()
-    return JsonResponse({'message': 'recorded transactions'})
+
+        # continue from here 
+        purchase_record = Purchase.objects.create(user=request.user)
+        
+
+        order_id = order.id
+        # to change it's permissions
+        permission = Permission.objects.get(codename='can_download_product')
+        user = User.objects.get(user=request.user)
+        user.user_permissions.set(permission)
+        user.save()
+        return redirect('kevibes:download-products', id=order_id)
+
+
+# @permission_required('kevibes.can_download_product')
+@login_required
+def download_products(request, order_id):
+    if request.method == 'GET':
+        order = get_object_or_404(Order, pk=order_id)
+        # permission = Permission.objects.get(codename='can_download_product')
+        return render(request, 'kevibes/download_products.html', context={'order': order})
 
 
 def forms(request):
-    if request.method == 'POST':
-        return HttpResponseRedirect('/')
-    else:
+    if request.method == "GET":
         return render(request, 'kevibes/forms/forms.html')
 
 
@@ -235,15 +259,19 @@ def signup(request):
 def verify_account(request):
     current_site = get_current_site(request)
     subject = 'Activate Your Kevibes Account'
-    message = render_to_string('kevibes/acc/account_activation_email.html', {
+    context = {
         'user': request.user,
-        'domain': 'kevibes.herokuapp.com',
+        'domain': "localhost:8000",
         'uid': urlsafe_base64_encode(force_bytes(request.user.pk)).decode(),
-        'token': account_activation_token.make_token(request.user),
-    })
+        'token': account_activation_token.make_token(request.user)
+    }
+    print(current_site)
+    print("UID:", context['uid'])
+
+    message = render_to_string('kevibes/acc/account_activation_email.html', context)
     try:
         request.user.email_user(subject, message)
-    except BaseException:
+    except smtplib.SMTPException:
         return JsonResponse({'message': 'Oops! Try Again'})
     return JsonResponse({'message': 'Account Verification Sent'})
 
@@ -257,7 +285,6 @@ def activate(request, uidb64, token):
 
     if user is not None and account_activation_token.check_token(user, token):
         user.profile.email_confirmed = True
-        print(user.profile.email_confirmed)
         user.profile.save()
         user.save()
         return HttpResponseRedirect('/dashboard/')
@@ -268,15 +295,22 @@ def activate(request, uidb64, token):
 def login_view(request):
     if request.method == 'POST':
         if request.user.is_authenticated:
-            return HttpResponseRedirect('/kevibes/')
+            return HttpResponseRedirect('/')
         else:
             user = authenticate(username=request.POST['username'], password=request.POST['password'])
-            if user is not None:
+            nextValue = request.POST.get('next-value')
+            print(nextValue)
+            if user is not None and (nextValue == '' or nextValue == None): # if no next value 
                 login(request, user)
                 return HttpResponseRedirect('/')
+            elif user is not None and nextValue: # to ensure a user is properly redirected
+                login(request, user)
+                return HttpResponseRedirect(nextValue)
             else:
                 return render(request, 'kevibes/forms/forms.html', {'message': 'invalid login credentials'})
-    else:
+    else: # get request
+        if request.user.is_authenticated:
+            return HttpResponseRedirect('/')
         return render(request, 'kevibes/forms/forms.html')
 
 
@@ -288,8 +322,13 @@ def logout_view(request):
         return HttpResponseRedirect('/forms/')
 
 
-def error(request):
-    return render(request, 'kevibes/error_page.html')
+def handler403(request, exception, template_name='kevibes/error_page.html'):
+    pass
+
+
+def handler404(request, exception, template_name='kevibes/error_page.html'):
+    return HttpResponseBadRequest()
+
 
 
 

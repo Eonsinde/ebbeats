@@ -1,12 +1,12 @@
 {% extends 'kevibes/index.html' %}
 
-
 {% block title %}{{ album.name|title }} Album View{% endblock %}
+
 {% block extrastyles %}
     <style>
         .album-header{
             height: 200px;
-            background:  linear-gradient(rgba(0, 0, 0, 0.356), rgba(0, 0, 0, 0.363)), url('{{ album.album_cover.url }}') center center;
+            background:  linear-gradient(rgba(0, 0, 0, 0.356), rgba(0, 0, 0, 0.363)), url('{% load static %}{% if album.album_cover.url != '' %}{{ album.album_cover.url }}{% else %}{% static "kevibes/images/default_album_cover.jpg" %}{% endif %}') center center;
             background-size: contain;
             position: relative;
         }
@@ -14,6 +14,64 @@
         .album-header-content{
             position: absolute;
             bottom: -40px;
+            padding: 0 1rem;
+            width: 100%;
+        }
+
+        /* .album-header-content > h1{
+            font-size: 50px;
+        } */
+        @media screen and (max-width: 768px) {
+            .album-header-content{
+                bottom: -40px;
+            }
+
+            .album-header-content > *{
+                transform: scale(.7);
+                font-size: 4rem;
+            }
+
+            .add-all-to-cart-btn{
+                font-size: medium;
+            }
+        }
+
+        @media screen and (max-width: 575px) {
+            .album-header-content{
+                bottom: -28px;
+            }
+           
+            .album-header-content > *{
+                font-size: 2.2rem;
+            }
+
+            .add-all-to-cart-btn{
+                font-size: medium;
+            }
+        }
+
+        .product-table-container{
+            overflow-x: auto;
+        }
+
+        .product-table-container::-webkit-scrollbar {
+            height: 2px;
+            transition: .5s ease;
+        }
+        
+        /* Track */
+        .product-table-container::-webkit-scrollbar-track {
+            background: #858585; 
+        }
+
+        /* Handle */
+        .product-table-container::-webkit-scrollbar-thumb {
+            background: #434343; 
+        }
+
+        /* Handle on hover */
+        .product-table-container::-webkit-scrollbar-thumb:hover {
+            background: #555; 
         }
 
         .product-table{
@@ -48,7 +106,7 @@
 <a href="{% url 'kevibes:explore' %}" class='navlink text-left text-uppercase'><i class='fas fa-globe mr-3'></i>Explore</a>
 <a href="{% url 'kevibes:contact' %}" class='navlink text-left text-uppercase'><i class='fas fa-phone-alt mr-3'></i>Contact</a>
 <a href="{% url 'kevibes:contribute' %}" class='navlink text-left text-uppercase'><i class='fas fa-gem mr-3'></i>Contribute</a>
-<a href="#" class='navlink text-left text-uppercase'><i class='fas fa-question-circle mr-3'></i>FAQs</a>
+<a href="{% url 'kevibes:faqs' %}" class='navlink text-left text-uppercase'><i class='fas fa-question-circle mr-3'></i>FAQs</a>
 {% endblock %}
 
 
@@ -57,13 +115,14 @@
 <section class='album-detail-section'>
     <!-- <div class="container"> -->
         <header class='album-header d-flex align-items-end'>
-            <div class='album-header-content px-4 d-flex justify-content-between align-items-center' style='width: 100%'>
+            <div class='album-header-content d-flex justify-content-between align-items-center'>
                 <h1 class='text-app text-uppercase fa-4x' style='text-shadow: 0 0 10px #000000bc;'>{{ album.name }}</h1>
                 <button class='btn btn-danger text-white add-all-to-cart-btn' title="add all products to cart" style='border-radius: 100%; padding: 13px 10px'><i class='fas fa-shopping-cart'></i> +</button>
             </div>
         </header>
 
         <article class='my-5'>
+            <div class="product-table-container">
             <table class='product-table'>
                 <thead>
                     <tr class='text-danger bg-dark'>
@@ -92,6 +151,7 @@
                     {% endfor %}
                 </tbody>
             </table>
+            </div>
         </article>
 
     <!-- </div>end of the container -->
@@ -108,19 +168,22 @@
             let submitTrials = 0;
             btn.addEventListener('click', function(){
                 submitTrials++;
+                btn.style.outline = 'none';
                 $.get(`/add-to-cart/${productsID[index].value}/`)
                     .done((res, status) => {
                         if (res.message === 'failure'){
-                            console.log(status);
+                            showAlert("Failed: You might not be logged in", 'danger', 5000, 'shake');
                         }else if(res.message === 'present'){
                             if (submitTrials >= 2){
                                 showAlert('Already in cart', 'dark', 5000, 'shake');
                             }else{
                                 showAlert('Already in cart', 'dark', 5200, 'fadeIn');
                             }
+                        }else if(res.message === 'success'){
+                            showAlert('Added to cart', 'info', 5500, 'fadeIn');
                         }
                         else{
-                            showAlert('Added to cart', 'info', 5500, 'fadeIn');
+                        	console.log(status);
                         }
                     });
             });
@@ -137,7 +200,9 @@
             productsID.forEach((product_id_input, index) => {
                 $.get(`/add-to-cart/${product_id_input.value}/`)
                 .done((res, status) => {
-                    return ;
+                    if (res.message === 'failure'){
+                        showAlert("Failed: You might not be logged in", 'danger', 5000, 'shake');
+                    }
                 }); // end of ajax section
             }); // end of for each
             

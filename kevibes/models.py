@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 import datetime
 from django.conf import settings
 from decimal import Decimal
@@ -17,7 +18,7 @@ class Genre(models.Model):
 class Album(models.Model):
     name = models.CharField(max_length=200)
     artist = models.CharField(max_length=200)
-    album_cover = models.ImageField(upload_to='album_cover/')
+    album_cover = models.ImageField(upload_to='album_cover/', null=True, blank=True)
     pub_date = models.DateField(auto_now=timezone.now)
 
     def __str__(self):
@@ -67,10 +68,16 @@ class Product(models.Model):
         return self.release_date >= timezone.now().date() - datetime.timedelta(days=7)
 
     def get_actual_price(self):
-        return self.discount_price * self.price
+        if self.discount_price == 0:
+            # implies no discount on certain product
+            return self.price
+        else:
+            # implies there is a discount
+            return self.discount_price * self.price
 
     class Meta:
         ordering = ['-release_date']
+        permissions = (("can_download_product", "Product can be downloaded"), )
 
 
 class OrderItem(models.Model):
@@ -105,6 +112,17 @@ class Order(models.Model):
             self.transaction_ref = value
 
 
+class Purchase(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    products = models.ManyToManyField(Product)
+
+    def __str__(self):
+        return f'{self.id} Purchase Record'
+
+    class Meta:
+        verbose_name = 'Purchase Record'
+
+
 # other details for the user model
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -116,5 +134,17 @@ class Profile(models.Model):
         return self.user.username + ' related images'
 
     class Meta:
-        verbose_name = 'Users Profile'
+        verbose_name = 'User\'s Profile'
+
+
+class FAQ(models.Model):
+    title = models.CharField(max_length=500)
+    content = models.TextField(max_length=1500)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'FAQ'
+        verbose_name_plural = 'FAQs'
 

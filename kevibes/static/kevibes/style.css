@@ -1,10 +1,16 @@
+@font-face {
+    font-family: myFont;
+    src: url('./PermanentMarker-Regular.ttf');
+  }
+
+
 *{
     margin: 0;
     padding: 0;  
 }
 
 body{
-    font-family: 'Permanent Marker', cursive;
+    font-family: myFont, cursive;
     letter-spacing: 1px;
     overflow: hidden;
     background: #373e44;
@@ -29,7 +35,6 @@ body{
 .main-content-bg{
     background: #373e44;
 }
-
 
 .navbar-toggler{
     display: none;
@@ -88,24 +93,25 @@ header  a{
 
 .drop-down:focus-within a.important-btn{
     background: #ffffff;
-    color: rgb(204, 57, 57);
-    box-shadow: 0 0 5px #000000bc;
+    color:  rgb(204, 57, 57);
 }
 
 a.important-btn{ /* dashboard settings */
     border-radius: 100%;
-    padding: 5px 9px;
+    padding: 4px 7px;
+
     font-size: 1rem;
 }
 
 a.important-btn:hover{
     background: #ffffff;
-    color: rgb(204, 57, 57);
+    color:  rgb(204, 57, 57);
+
 }
 
 a.cart-link{ /* cart link button */
     border-radius: 100%;
-    padding: 5px 10px;
+    padding: 4px 9px;
 }
 
 a.cart-link:hover{
@@ -117,17 +123,66 @@ header a:hover{
     color: #fff;
 }
 
+@media screen and (max-width:  768px){
+    a.important-btn:hover{
+        background: transparent;
+        color: #ccc;
+    }
+
+        
+    .drop-down:focus-within a.important-btn{
+        background: transparent;
+        color: #ccc;
+    }
+    
+    a.cart-link:hover{
+        background: transparent;
+        color: #ccc;
+    }
+}
+
 
 /* for the nav section of our application */
 nav#side-nav{
     width: 260px;
     position: fixed;
     height: 100%;
-    z-index:2;
-    padding: 10px 0px 0px 0px;
-    overflow: hidden;
+    z-index: 2;
+    padding: .1rem 0rem;
     transition: .4s ease;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
+
+div.side-nav-sub-container{
+    margin: 3.6rem 0 3.6rem 0;
+    /* padding: 100px 0; */
+    /* background: green; */
+}
+
+
+/* for the scroll bar */
+/* width */
+nav#side-nav::-webkit-scrollbar {
+    width: 6px;
+    transition: 5s ease;
+}
+  
+/* Track */
+nav#side-nav::-webkit-scrollbar-track {
+background: #858585; 
+}
+
+/* Handle */
+nav#side-nav::-webkit-scrollbar-thumb {
+background: #434343; 
+}
+
+/* Handle on hover */
+nav#side-nav::-webkit-scrollbar-thumb:hover {
+background: #555; 
+}
+  
 
 .btn-close{
     display: none;
@@ -144,7 +199,8 @@ nav#side-nav{
 }
 
 .my-navbar{
-    margin: 100px 0px 0px 0px;
+    margin: 100px 0px 135px 0px;
+    /* background: red; */
 }
 
 .navlink{
@@ -166,11 +222,9 @@ nav#side-nav{
 }
 
 footer{
+    margin: 3.6rem 0 3.6rem 0;
+
     width: 100%;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 78px;
     color: #ecebeb;
 }
 
@@ -188,6 +242,10 @@ footer{
     font-size: .8rem;
 }
 
+@media screen and (max-width: 768px){
+
+}
+
 
 
 /* for the main-content section of our app */
@@ -203,11 +261,47 @@ footer{
     overflow-x: hidden;
 }
 
+
+/* for the scroll bar */
+/* width */
+.main-content::-webkit-scrollbar {
+    width: 6px;
+    transition: .5s ease;
+  }
+  
+  /* Track */
+  .main-content::-webkit-scrollbar-track {
+    background: #858585; 
+  }
+   
+  /* Handle */
+  .main-content::-webkit-scrollbar-thumb {
+    background: rgb(43, 43, 43); 
+  }
+  
+  /* Handle on hover */
+  .main-content::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  
+
+
+
 .home-content{
-    /* background: linear-gradient(rgba(0,0,0,.5), rgba(0, 0, 0, 0.281)), url('./images/colorful_vintage_stripes-wallpaper-2560x1600.jpg') center center/cover; */
-    height: 95vh;
+    /* background: linear-gradient(rgba(70, 70, 70, 0.301), rgba(39, 39, 39, 0.281)), url('./images/black-turntable-1653090.jpg') center center/cover; */
+    height: 94%;
     position: relative;
     width: 100%;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.281), 0 0 10px rgba(0, 0, 0, 0.281); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-content > #message-input{
+    padding: 0;
+    margin: 0;
+    text-shadow: 0 0 10px #d6d1d181;
 }
 
 #myCarousel{
@@ -285,8 +379,13 @@ footer{
     }
 
     nav#side-nav{
+        padding: 3rem 0rem;
         transform: translate3d(-260px, 0px, 0px);
         z-index: 2;
+    }
+
+    .home-content{
+        height: 92.3%;
     }
 
     footer{ /* for my nav bar footer */
@@ -301,11 +400,24 @@ footer{
 
 @media screen and (max-width: 575px){
     /* for the main header nav of our application */
+    .home-content{
+        height: 83%;
+    }
+
     .h-right{
         margin-top: 6px;
         /* background: #212122; */
         padding: 10px 0px;
-        box-shadow: 0 0 2px #000000bc;        
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);       
+    }
+
+    /* for nav responsiveness */
+    nav#side-nav{
+        padding: 4rem 0rem;
+    }
+
+    .my-navbar{
+        margin: 80px 0 110px 0;
     }
 
     footer{ /* for my nav bar footer */

@@ -12,14 +12,15 @@
         }
 
         .form-section{
-            background: linear-gradient(rgba(0,0,0,.5), rgba(0,0, 0, 0.5)) , rgba(32, 32, 34, 0.918);
+            background: linear-gradient(rgba(0, 0, 0, 0.63), rgba(0, 0, 0, 0.692)) , rgba(32, 32, 34, 0.911);
             width: 50%;
             margin: auto;
             padding: 30px 0px;
             position: relative;
             left: 0;
             right: 0;
-            overflow: hidden;
+            overflow-y: auto;
+            overflow-x: hidden;
             height: 100%;
             box-shadow: 0 0 20px #000000bc;
         }
@@ -59,8 +60,7 @@
         .form-btn:hover{
             color: #eeeeee; 
             background: #dc3545;
-            transform: scale(1.1);
-            box-shadow: 0 0 10px #000000bc;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
         }
 
         .form-btn:focus-within{
@@ -124,23 +124,23 @@
             }
         }
 
-        @media screen and (max-width: 563px){
+        @media screen and (max-width: 575px){
             .form-section{
-                width: 90%;
+                width: 100%;
             }
 
             .login-form, .signup-form{
-                width: 400px;
+                width: 100%;
+            }
+
+            .login-form{
+                transform: translate(-100%, 0px);
+            }
+
+            .signup-form{
+                transform: translate(100%, 0px);
             }
         }
-
-
-        @media screen and (max-width: 454px){
-            .login-form, .signup-form{
-                width: 350px;
-            }
-        }
-
     </style>
     {% endblock %}
 
@@ -167,6 +167,7 @@
                     <label for="passcode">Password</label>
                     <input type="password" name='password' id='passcode'>
                 </div>
+                <input type="hidden" value="{{ request.GET.next }}" name='next-value'>
                 <div class="form-group d-flex justify-content-between align-items-center">
                     <button class='form-btn login-btn' style='letter-spacing: 2px;'>Login</button>
                     <a href="#" class='signup-form-btn text-white-50' onclick='displaySignupForm()'>Not Registered?</a>

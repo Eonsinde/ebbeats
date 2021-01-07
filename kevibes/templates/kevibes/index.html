@@ -9,12 +9,11 @@
     <meta name="keywords" content="Kevibes, Ebenezer ukwe, get music beats and drum kits in several genres, afro, hip pop, trap">
     <meta name="author" content="Ebenezer ukwe">
     <title>{%block title%}Kevibes - Home{%endblock%}</title>
-    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'kevibes/bootstrap-4.3.1-dist/css/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static 'kevibes/fontawesome-5/css/all.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'kevibes/bootstrap-4.3.1-dist/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'kevibes/fontawesome-5/css/all.css' %}"> -->
 
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
     
     <link rel="stylesheet" href="{% static 'kevibes/WOW/css/libs/animate.css' %}">
     <link rel="stylesheet" href="{% static 'kevibes/owl-carousel/dist/assets/owl.carousel.min.css' %}">
@@ -40,7 +39,8 @@
                         <p class='text-app m-0'>Hi, {{ user.username }}</p>
                         <hr class='my-2' style='background: #666666'>
                         <a href="{% url 'kevibes:dashboard' %}" class='text-app d-block mb-2'><i class=" mr-1 fas fa-burn"></i> Dashboard</a>
-                        <a href="{% url 'kevibes:update-profile' %}" class='text-app d-block mb-1'><i class="fas fa-user-edit mr-1 "></i> Edit Profile</a>
+                        <a href="{% url 'kevibes:update-profile' %}" class='text-app d-block mb-2'><i class="fas fa-user-edit mr-1 "></i> Edit Profile</a>
+                        <a href="#" class="text-app d-block mb-1"><i class="fas fa-money-bill-wave mr-1"></i> Purchases</a>
                     {% else %}
                         <p class='pb-2 text-app' style="border-bottom: 1px #4b4b4b solid;">Hi, User</p>
                         <a href="#" class='text-app'>Log in to access other features</a>
@@ -60,32 +60,37 @@
 
     <section style='overflow: hidden;'>
         <nav id='side-nav' class='side-nav bg-dark shadow-sm'>
-            <a href="#" class='btn-close' onclick="navbarClose()">&times;</a>
-            <section class="my-navbar">
-                {% block navlinks %}
-                    <a href="{% url 'kevibes:home' %}" class='navlink text-left text-uppercase active'><i class='fas fa-home mr-3'></i>Home</a>
-                    <a href="{% url 'kevibes:explore' %}" class='navlink text-left text-uppercase'><i class='fas fa-globe mr-3'></i>Explore</a>
-                    <a href="{% url 'kevibes:contact' %}" class='navlink text-left text-uppercase'><i class='fas fa-phone-alt mr-3'></i>Contact</a>
-                    <a href="{% url 'kevibes:contribute' %}" class='navlink text-left text-uppercase'><i class='fas fa-gem mr-3'></i>Contribute</a>
-                    <a href="#" class='navlink text-left text-uppercase'><i class='fas fa-question-circle mr-3'></i>FAQs</a>
-                {% endblock %}
-            </section>
-            <footer>
-                <section class="social-icons-section d-flex justify-content-center align-items-center mb-2">
-                    <a href="#"><i class="fab fa-facebook-square social-icon mr-3"></i></a>
-                    <a href="#"><i class="fab fa-instagram social-icon mr-3"></i></a>
-                    <a href="#"><i class='fab fa-twitter-square social-icon mr-3'></i></a>
+            <div class="side-nav-sub-container">
+                <a href="#" class='btn-close' onclick="navbarClose()">&times;</a>
+                <section class="my-navbar">
+                    {% block navlinks %}
+                        <a href="{% url 'kevibes:home' %}" class='navlink text-left text-uppercase active'><i class='fas fa-home mr-3'></i>Home</a>
+                        <a href="{% url 'kevibes:explore' %}" class='navlink text-left text-uppercase'><i class='fas fa-globe mr-3'></i>Explore</a>
+                        <a href="{% url 'kevibes:contact' %}" class='navlink text-left text-uppercase'><i class='fas fa-phone-alt mr-3'></i>Contact</a>
+                        <a href="{% url 'kevibes:contribute' %}" class='navlink text-left text-uppercase'><i class='fas fa-gem mr-3'></i>Contribute</a>
+                        <a href="{% url 'kevibes:faqs' %}" class='navlink text-left text-uppercase'><i class='fas fa-question-circle mr-3'></i>FAQs</a>
+                    {% endblock %}
                 </section>
-                <section class='copyright-section text-center text-uppercase'>
-                    <p class='m-0'>Copyright &copy; 2019; Kevibes</p>
-                    <small class='m-0'>Developed by <a target=_blank href="https://www.instagram.com/eon_sinde/" class='text-white' style='text-decoration: none;'>scrotch</a></small>
-                </section>
-            </footer>
+                <div class="test">
+                    <!-- Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda voluptatibus nesciunt maxime enim eum, libero porro optio quidem minus odio atque qui dolorem ducimus neque dolore laborum rem! Tenetur fugit velit atque nulla doloribus modi corrupti ipsa minus ipsam veniam hic repudiandae totam quis debitis harum, voluptatum ex dicta molestiae quia voluptate optio expedita dolores repellat. Vero necessitatibus culpa, rem molestias obcaecati quae, iure quasi magnam unde accusantium eos sed, laboriosam sint ex itaque laudantium repellendus dolorum provident veniam. Vero aperiam deleniti architecto blanditiis sapiente accusantium distinctio, facilis laboriosam. Eligendi corporis labore veniam nostrum molestiae nam soluta nemo consectetur temporibus! -->
+                </div>
+                <footer>
+                    <section class="social-icons-section d-flex justify-content-center align-items-center mb-2">
+                        <a href="#"><i class="fab fa-facebook-square social-icon mr-3"></i></a>
+                        <a href="#"><i class="fab fa-instagram social-icon mr-3"></i></a>
+                        <a href="#"><i class='fab fa-twitter-square social-icon mr-3'></i></a>
+                    </section>
+                    <section class='copyright-section text-center text-uppercase'>
+                        <p class='m-0'>Copyright &copy; 2020; Kevibes</p>
+                        <small class='m-0'>Developed by <a target=_blank href="https://www.instagram.com/eon_sinde/" class='text-white' style='text-decoration: none;'>scrotch</a></small>
+                    </section>
+                </footer>
+            </div>
         </nav>
         <main class='main-content'>
             {% block content %}
             <section class="p-2 home-content">
-                <h1 id="message-input" class="text-uppercase text-center text-app" style="position: absolute; z-index: 2; width:50%; top: 13.5pc; right:0; left: 0; margin: auto;"></h1>
+                <h1 id="message-input" class="text-uppercase text-center text-app"></h1>
             </section>
             {% endblock %}
         </main>
@@ -94,10 +99,10 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js"></script> -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeit/6.1.1/typeit.min.js"></script>
-    <script src="{% static 'kevibes/bootstrap-4.3.1-dist/js/bootstrap.js' %}"></script>
+    <!-- <script src="{% static 'kevibes/bootstrap-4.3.1-dist/js/bootstrap.js' %}"></script> -->
     <script src="{% static 'kevibes/typeit-master/dist/typeit.min.js' %}"></script>
     <script src="{% static 'kevibes/owl-carousel/dist/owl.carousel.js' %}"></script>
     <script src="{% static 'kevibes/WOW/dist/wow.js' %}"></script>
@@ -105,12 +110,16 @@
     <script type="text/javascript">
         navbarClose = () => {
             document.querySelector('#side-nav').style.transform = 'translate3d(-260px, 0px, 0px)';
-            document.querySelector('.main-content').style.marginLeft = '0px';
+            let mainContent = document.querySelector('.main-content');
+            mainContent.style.marginLeft = '0px';
+            mainContent.style.overflowY = 'auto'; 
         }
 
         navbarOpen = () => {
             document.querySelector('#side-nav').style.transform = 'translate3d(0px, 0px, 0px)';
-            document.querySelector('.main-content').style.marginLeft = '260px';
+            let mainContent = document.querySelector('.main-content');
+            mainContent.style.overflowY = 'hidden';
+            mainContent.style.marginLeft = '260px';
         }
 
         new TypeIt('#message-input', {
@@ -123,7 +132,7 @@
         .type('Purchase<br> music beats, drum kits and loops')
         .pause(3000)
         .delete()
-        .type('We have them all in whatever genre')
+        .type('We have them <br> all in whatever genre')
         .pause(2000)
         .delete()
         .type('Afro, Hip Pop Trap,')
@@ -141,30 +150,14 @@
         .type("Don't forget to rate our <br>beats, kits and loops")
         .go();
 
-        new WOW({
-            animateClass: 'animated',
-            offset: 100,
-            callback: function(box) {
-                return ;
-            }
-        }).init();
+        // new WOW({
+        //     animateClass: 'animated',
+        //     offset: 100,
+        //     callback: function(box) {
+        //         return ;
+        //     }
+        // }).init();
 
-        $('.owl-carousel').owlCarousel({
-            loop:true,
-            margin:10,
-            nav:false,
-            responsive:{
-                0:{
-                    items:1
-                },
-                600:{
-                    items:3
-                },
-                1000:{
-                    items:5
-                }
-            }
-        });
     </script>
 
     {% block extrascripts %}

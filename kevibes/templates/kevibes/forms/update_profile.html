@@ -42,8 +42,8 @@
         .form-btn:hover{
             color: #eeeeee; 
             background: #dc3545;
-            transform: scale(1.1);
-            box-shadow: 0 0 10px #000000bc;
+            /* transform: scale(1.1); */
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
         }
 
         .form-btn:focus-within{
@@ -58,7 +58,7 @@
     <a href="{% url 'kevibes:explore' %}" class='navlink text-left text-uppercase'><i class='fas fa-globe mr-3'></i>Explore</a>
     <a href="{% url 'kevibes:contact' %}" class='navlink text-left text-uppercase'><i class='fas fa-phone-alt mr-3'></i>Contact</a>
     <a href="{% url 'kevibes:contribute' %}" class='navlink text-left text-uppercase'><i class='fas fa-gem mr-3'></i>Contribute</a>
-    <a href="#" class='navlink text-left text-uppercase'><i class='fas fa-question-circle mr-3'></i>FAQs</a>
+    <a href="{% url 'kevibes:faqs' %}" class='navlink text-left text-uppercase'><i class='fas fa-question-circle mr-3'></i>FAQs</a>
 {% endblock %}
 
 

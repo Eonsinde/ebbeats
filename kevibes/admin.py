@@ -29,6 +29,11 @@ class AlbumAdmin(admin.ModelAdmin):
     pass
 
 
+@admin.register(Purchase)
+class PurchaseRecordAdmin(admin.ModelAdmin):
+    pass
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_filter = ('price', 'album', 'genre')
@@ -43,4 +48,8 @@ class OrderItemAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     pass
 
+
+@admin.register(FAQ)
+class FAQAdmin(admin.ModelAdmin):
+    pass
 

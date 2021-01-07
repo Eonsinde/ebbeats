@@ -10,6 +10,7 @@ admin.site.site_header = "Kevibes Admin"
 admin.site.site_title = "Kevibes Admin Portal"
 admin.site.index_title = "Welcome to Kevibes Admin Portal"
 
+
 urlpatterns = [
     path('', views.index, name='home'),
     path('explore/', views.explore, name='explore'),
@@ -21,7 +22,9 @@ urlpatterns = [
     path('remove-from-cart/<int:pk>/', views.remove_from_cart, name='remove-from-cart'),
     path('checkout/', views.checkout, name='checkout'),
     path('payment-successful/', views.payment_success, name='payment-successful'),
+    path('download-products/<int:order_id>/', views.download_products, name='download-product'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('FAQs/', views.faqs, name='faqs'),
     path('verify-account/', views.verify_account, name='verify-account'),
     re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         views.activate, name='activate'),
@@ -30,5 +33,8 @@ urlpatterns = [
     path('login/', views.login_view, name='login-view'),
     path('signup/', views.signup, name='signup-view'),
     path('logout/', views.logout_view, name='logout-view'),
-    path('error/', views.error, name='error'),
 ]
+
+
+
+

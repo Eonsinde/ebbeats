@@ -1,19 +1,19 @@
 {% extends 'kevibes/index.html' %}
 
-{% block title %}Kevibes - {{ request.user.username }} Dashboard{% endblock %}
+{% block title %}Kevibes - {{ request.user.username|title }} Dashboard{% endblock %}
 
 {% block extrastyles %}
     <style>
         li{
-            padding: 10px;
+            padding: 10px 15px;
         }
 
         li:nth-child(odd){
-            background: #212122;
+            background: #2e2e30;
         }
 
         li:nth-child(even){
-            background: #242525;
+            background: #292a2b;
         }
     
     </style>
@@ -25,7 +25,7 @@
     <a href="{% url 'kevibes:explore' %}" class='navlink text-left text-uppercase'><i class='fas fa-globe mr-3'></i>Explore</a>
     <a href="{% url 'kevibes:contact' %}" class='navlink text-left text-uppercase'><i class='fas fa-phone-alt mr-3'></i>Contact</a>
     <a href="{% url 'kevibes:contribute' %}" class='navlink text-left text-uppercase'><i class='fas fa-gem mr-3'></i>Contribute</a>
-    <a href="#" class='navlink text-left text-uppercase'><i class='fas fa-question-circle mr-3'></i>FAQs</a>
+    <a href="{% url 'kevibes:faqs' %}" class='navlink text-left text-uppercase'><i class='fas fa-question-circle mr-3'></i>FAQs</a>
 {% endblock %}
 
 
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     {% if user.order_set.all %}
-                        <div class='mt-3 bg-info p-3 text-md-left text-sm-center text-center'>
+                        <div class='mt-3 bg-dark p-3 text-md-left text-sm-center text-center'>
                             <p class='px-3 py-0 fa-2x m-0'>Order Info</p>
                             <p class='px-3 py-0 m-0'>Monitor Details On Orders That Have Been Made Successfully</p>
                         </div>
@@ -81,7 +81,10 @@
                             <li>You have a currently uncompleted order <a href="{% url 'kevibes:cart' %}">View</a></li>
                         </ul>
                     {% else %}
-                        <p>No records of any order</p>
+                        <div class='bg-dark mt-3 p-4 text-center'>
+                            <h5 class='text-center text-capitalize'>No records of any order</h5>
+                            Start making orders <a class='' href='{% url "kevibes:explore" %}'>click me</a>
+                        </div>
                     {% endif %}
                 {% else %}<!-- end of else statement for profile.email_confirmed -->
                     <div class='row m-0 p-2 bg-danger'>
@@ -101,10 +104,11 @@
                         verBtn = document.querySelector('.verify-acc-btn');
                         verBtn.onclick = () => {
                             $.get('/verify-account/')
-                            .done(res => {
-                                console.log(res);
+                            .done((res,status) => {
+                                console.log(status);
                                 showAlert(`${res.message}`, 'info', 5000, 'fadeIn');
-                            });
+                            })
+                            .fail((e) => console.log(e.response));
                         }
                     </script>
                 {% endif %}
